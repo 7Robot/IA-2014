@@ -26,12 +26,12 @@ class Mission:
     state = property(_get_state, _set_state)
 
 
-    def create_send_event(self, board, name, args=None):
-        m = Msg(board, name, args)
+    def create_send_event(self, board, name, **kwargs):
+        m = Msg(board, name, kwargs)
         self.robot.queue.put(m, True)
 
-    def create_send_internal(self, name, args=None):
-        m = InternalMsg(name, args)
+    def create_send_internal(self, name, **kwargs):
+        m = InternalMsg(name, kwargs)
         self.robot.queue.put(m, True)
         
     def send_event(self, msg):
@@ -47,6 +47,4 @@ class Mission:
         t.start()
 
     def go(self, msg):
-        logging.warn('Mission not implemented')
-        return state
-
+        raise NotImplementedError()
