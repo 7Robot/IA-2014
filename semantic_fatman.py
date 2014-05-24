@@ -39,7 +39,6 @@ class Asserv(Proto):
     block = Packet(2, "arm")
     done = Packet(3, "pic")
 
-
     motion_pos = Packet(10, "arm", [
         ("x", "f"),
         ("y", "f")
@@ -51,7 +50,6 @@ class Asserv(Proto):
     motion_angle = Packet(12, "arm", [
         ("theta", "f")
         ])
-
 
     getPos = Packet(30, "arm")
     pos = Packet(31, "pic", [
@@ -71,16 +69,25 @@ class Asserv(Proto):
     catch_arm = Packet(51, "arm", [
         ("choix", "H")
         ])
-    stock_arm = Packet(52, "arm", [
+    caught = Packet(52 ,"pic",[
+      ("success" , "B"),
+      ])
+    
+    
+    
+    stock_arm = Packet(53, "arm", [
         ("choix", "H")
         ])
-    pull_arm = Packet(53, "arm", [
+    pull_arm = Packet(54, "arm", [
         ("choix", "H")
         ])
-    push_arm = Packet(54, "arm", [
+    push_arm = Packet(55, "arm", [
         ("choix", "H")
         ])
-    launch_net = Packet(55, "arm")
+    launch_net = Packet(56, "arm")
+
+    convoyer = Packet(57, "arm")
+
 
 
 #    odoBroadcastOn = Packet(43, "arm")
