@@ -4,7 +4,6 @@ import logging
 import os
 from classmanager import class_loader
 from missions.mission import Mission
-from msg.msg import InternalMsg
 
 class IA:
     def __init__(self, robot, boardth):
@@ -24,17 +23,17 @@ class IA:
                 self.missions += [m]
                 self.logging.warn('mission %s loaded ...' % m.name)
 
+
     def get_msg(self):
         return self.robot.queue.get(True)
 
+
     def run(self):
-        self.robot.queue.put(InternalMsg('dummy message'))
         while True:
             try:
                 m = self.get_msg()
                 for mission in self.missions:
                     mission.go(m)
-                    logging.warn("going to state"))
 
             except KeyboardInterrupt:
                 break

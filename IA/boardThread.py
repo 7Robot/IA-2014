@@ -9,7 +9,7 @@ from msg.msg import Msg
 
 class BoardThread(threading.Thread):
     def __init__(self, robot):
-        super(BoardThread, self).__init__()
+        super().__init__()
 
         self.robot = robot
         self.channels = dict()

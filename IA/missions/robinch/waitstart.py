@@ -10,14 +10,16 @@ class WaitForSignal(Mission):
 
     def go(self, msg):
         if (self.state == 'off' and msg.board == 'asserv' and msg.name == 'start'):
-            logging.warn("starting mission %s" % self.name)
+            self.state = 'lances'
             self.create_timer(85.0, 'fin_du_match'): #fin du match après 85sec (pour etre large)
             if msg.color == 0:
                 Mission.data['color'] = 'rouge'
             elif msg.color == 1:
                 Mission.data['color'] = 'jaune'
+ 
+            self.create_send_internal('beginlances')
 
-            self.create_send_internal('beginmatch')
+        elif (self.state == 'lances'):
 
         elif (msg.board == "internal" and msg.name == "fin_du_match"):
             logging.warn("End of match, stopping robot ...")
