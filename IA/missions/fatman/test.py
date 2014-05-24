@@ -10,15 +10,12 @@ class Test(Mission):
         super().__init__(robot, boardth)
         self.name = 'Wait for start'
 
-    def go(self, msg, state):
-        logging.warn("starting mission %s" % self.name)
-        if state == 0:
-            self.asserv.motion_pos(0.1, 0)
-        elif state == 1:
-            self.asserv.motion_angle(math.pi / 2)
-        elif state == 2:
-            self.asserv.motion_pos(0, 0)
-        elif state == 3:
-            self.asserv.motion_angle(0)
+    def go(self, msg):
+        if msg.board == 'internal' and msg.name == 'init':
+            self.create_send_internal('goto', {'position': (0.7, 0.05), 'angle': math.pi})
+            self.state = 'sortie'
+        elif self.state == 'sortie' and msg.board == 'internal' and msg.name == 'done':
+            self.state = 'prendre premier feu'
+            self.asserv.catch_arm(2)
 
-        return state + 1
+# y positif ==> on s'éloigne du bord original

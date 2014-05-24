@@ -11,6 +11,7 @@ class Goto(Mission):
         if (msg.board == "internal" and msg.name == 'goto'):
             self.position = msg.position
             self.angle = msg.angle
+            self.asserv.motion_pos(self.position[0], self.position[1])
             self.state = "going"            
         
         elif (self.state == "going"):
@@ -18,6 +19,7 @@ class Goto(Mission):
                 self.asserv.stop()
                 self.state = "waiting"
             elif msg.board == "asserv" and msg.name == 'done':
+                self.asserv.motion_angle(self.angle)
                 self.state = 'turning'
 
         elif self.state == 'turning':

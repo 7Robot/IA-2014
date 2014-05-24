@@ -26,11 +26,11 @@ class Mission:
     state = property(_get_state, _set_state)
 
 
-    def create_send_event(self, board, name, args):
+    def create_send_event(self, board, name, args=None):
         m = Msg(board, name, args)
         self.robot.queue.put(m, True)
 
-    def create_send_internal(self, name, args):
+    def create_send_internal(self, name, args=None):
         m = InternalMsg(name, args)
         self.robot.queue.put(m, True)
         

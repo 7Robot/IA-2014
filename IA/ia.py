@@ -4,6 +4,7 @@ import logging
 import os
 from classmanager import class_loader
 from missions.mission import Mission
+from msg.msg import InternalMsg
 
 class IA:
     def __init__(self, robot, boardth):
@@ -29,6 +30,7 @@ class IA:
 
 
     def run(self):
+        self.robot.queue.put(InternalMsg("init"))
         while True:
             try:
                 m = self.get_msg()
