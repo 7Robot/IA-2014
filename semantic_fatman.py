@@ -51,8 +51,13 @@ class Asserv(Proto):
         ("theta", "f")
         ])
 
-    getPos = Packet(30, "arm")
-    pos = Packet(31, "pic", [
+    setPos = Packet(30, "arm", [
+        ("x", "f"),
+        ("y", "f"),
+        ("theta", "f")
+        ])
+    getPos = Packet(31, "arm")
+    pos = Packet(32, "pic", [
         ("x", "f"),
         ("y", "f"),
         ("theta", "f")
