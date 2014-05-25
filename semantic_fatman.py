@@ -95,6 +95,16 @@ class Asserv(Proto):
 
 
 
+      #### Message pour sick
+
+    sick = Packet(61, 'pic', [("id", "B")])
+    freepath = Packet(62, 'pic', [("id", "B")])
+    sickThreshold = Packet(63, 'arm', [
+        ("id", "B"),
+        ('threshold', "H")
+        ])
+
+
 #    odoBroadcastOn = Packet(43, "arm")
 #    odoBroadcastOff = Packet(44, "arm")
 #    odoBroadcastToggle = Packet(45, "arm")
