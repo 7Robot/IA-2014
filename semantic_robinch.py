@@ -194,21 +194,20 @@ class Asserv(Proto):
     setXYTheta = Packet(49, "arm", [("x", "f"), ("y", "f"), ("theta", "f")])
     setXY = Packet(50, "arm", [("x", "f"), ("y", "f")])
     
-    ########## Message de debut de match et autres (51<n<71)###########
+    ########## Message de debut de match et autres (50<n<71)###########
 
     start = Packet(51, "pic", [("color", "i")])
     
     ########### Message de lance balles (>70) ############
 
     launchBalls = Packet(71, "arm", [
+        ("amount_left", "H")
+        ])
+    setBalls = Packet(74, "arm", [
         ("amount", "H")
         ])
-    
-    getBalls = Packet(73, "arm")
-    balls = Packet(74, "pic", [
-        ("amount", "H")
-        ])
-    stopLaunch = Packet(75, "arm")
+    doneLaunch = Packet(72, "pic")
+    stopLaunch = Packet(73, "arm")
     
 
 class Turret(Proto):
