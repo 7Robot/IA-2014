@@ -17,12 +17,15 @@ class WaitForSignal(Mission):
             elif msg.color == 1:
                 Mission.data['color'] = 'jaune'
  
-            self.create_send_internal('beginlances')
+            self.create_send_internal('beginLances')
 
-        elif (self.state == 'lances'):
+        elif (self.state =='lances' and msg.board == 'internal' and msg.name == 'endLances'):
+            #self.create_send_internal('beginPeintures')
+            state = 'off'
 
         elif (msg.board == "internal" and msg.name == "fin_du_match"):
             logging.warn("End of match, stopping robot ...")
             self.asserv.stop()
+            self.asserv.stopLaunch()
             self.state = 'off'
             

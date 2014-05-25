@@ -16,7 +16,7 @@ class Lances(Mission):
 
         elif (self.state == 'on' and msg.board == 'internal' and msg.name == 'forward_done'):
             self.asserv.odoBroadcastOn()
-            self.asserv.speed(0.05, 0.1, 0.1)
+            self.asserv.speed(0.03, 0.1, 0.1)
             self.asserv.launchBalls(1)
             self.state = "speed_lances"
 
@@ -27,7 +27,7 @@ class Lances(Mission):
             self.state = 'alert'
 
         elif (self.state = 'alert' and msg.board == 'internal' and msg.name == 'freepath'): 
-            self.asserv.speed(0.05, 0.1, 0.1)
+            self.asserv.speed(0.03, 0.1, 0.1)
             self.asserv.launchBalls(1)
             self.state = 'speed_lances'
 
@@ -37,13 +37,13 @@ class Lances(Mission):
                 self.asserv.stopLaunch()
                 self.asserv.odoBroadcastOff()
                 self.state = 'off'
-                # FIXME
+                self.create_send_internal('endLances')
 
             if (msg.board == 'asserv' and msg.name == 'pos' and abs(msg.x) > 0.90):
                 self.asserv.stop()
                 self.asserv.stopLaunch()
                 self.asserv.odoBroadcastOff()
-                self.state = 'off'
-                # FIXME
+                self.state = 'off' 
+                self.create_send_internal('endLances')
 
 

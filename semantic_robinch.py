@@ -194,9 +194,18 @@ class Asserv(Proto):
     setXYTheta = Packet(49, "arm", [("x", "f"), ("y", "f"), ("theta", "f")])
     setXY = Packet(50, "arm", [("x", "f"), ("y", "f")])
     
-    ########## Message de debut de match et autres (50<n<71)###########
+    ########## Message de debut de match et autres (50<n<60)###########
 
     start = Packet(51, "pic", [("color", "i")])
+
+    ########## Message pour sick (61<n<70)##############
+
+    sick = Packet(61, 'pic', [("id", "B")])
+    freepath = Packet(62, 'pic', [("id", "B")])
+    sickThreshold = Packet(63, 'arm', [
+        ("id", "B"),
+        ('threshold', "H")
+        ])
     
     ########### Message de lance balles (>70) ############
 
