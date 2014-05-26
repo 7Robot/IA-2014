@@ -9,17 +9,10 @@ class Peintures(Mission):
         self.name = 'Peintures'
 
     def go(self, msg):
-        if (self.state == 1 and msg.board == 'internal' and msg.name == 'beginmatch'):
-            logging.warn("starting mission %s" % self.name)
-            self.asserv.distRot(1, 0)
-            self.state = 2
-        if self.state == 2:
-            if (msg.board == 'internal' and msg.name == 'alert'):
-                self.asserv.stop()
-                #determiner la distance a l'objet
-            elif (msg.board == 'asserv' and msg.name == 'freepath'):
-                self.asserv.distRot(0,0)
-                #envoyer la consigne a l'objet
-            elif (msg.board == 'asserv' and msg.name == 'done'):
-                self.state = 3
+        if (self.state == 'off' and msg.board == 'internal' and msg.name == 'beginPeintures'):
+            self.state = 'on'
+            self.create_send_internal('forward', target=1, axe='x')
+
+        elif (self.state == 'on' and msg.board == 'internal' and msg.name == 'forward_done'):
+            pass
 

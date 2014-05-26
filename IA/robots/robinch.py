@@ -10,7 +10,7 @@ class Robinch:
         self.transmitter = 'arm'
         self.boards  = { "Asserv": 1301, "Turret": 1308 }
         self.semantic = '../semantic_robinch.py'
-        self.host = 'localhost'
+        self.host = 'robinch'
         self.queue = Queue()
 
         #position et orientation initiale du robot
