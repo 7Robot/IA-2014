@@ -4,7 +4,6 @@ import math
 class Filet(Mission):
     def __init__(self, robot, boardth):
         super().__init__(robot, boardth)
-        self.name = 'Filet mission'
         self.position = None
         self.angle = None
         
