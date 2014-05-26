@@ -22,7 +22,7 @@ class IA:
             if mission.__name__ != "Mission" and issubclass(mission, Mission):
                 m = mission(self.robot, self.boardth)
                 self.missions += [m]
-                self.logging.warn('mission %s loaded ...' % m.name)
+                self.logging.warn('mission %s loaded ...' % m.__class__.__name__)
 
 
     def get_msg(self):

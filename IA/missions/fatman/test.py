@@ -6,7 +6,6 @@ import math
 class Test(Mission):
     def __init__(self, robot, boardth):
         super().__init__(robot, boardth)
-        self.name = 'Wait for start'
 
     def go(self, msg):
         if msg.board == 'internal' and msg.name == 'init':
@@ -16,13 +15,26 @@ class Test(Mission):
         elif self.state == 'sortie' and msg.board == 'internal' and msg.name == 'goto done':
             self.state = 'prendre premier feu'
             self.asserv.catch_arm(2)
-        elif self.state == 'prendre premier feu' and msg.board == 'asserv' and msg.name == 'caught':
+        elif self.state == 'prendre premier feu' and msg.name == 'caught':
             self.state = 'demi tour 1'
             self.create_send_internal('goto', position=(0.95, 0.05), angle=0)
-        elif self.state == 'demi tour 1' and msg.board == 'internal' and msg.name == 'goto done':
+        elif self.state == 'demi tour 1' and msg.name == 'goto done':
             self.state = 'fruits 1'
-            self.create_send_internal('goto', position=(1.4, 0.02), angle=0)
-        elif self.state == 'fruits 1' and msg.board == 'internal' and msg.name == 'goto done':
+            self.create_send_internal('goto', position=(1.4, 0.04), angle=0)
+        elif self.state == 'fruits 1' and msg.name == 'goto done':
+            self.state = 'devant deuxième feu'
+            self.create_send_internal('goto', position=(1.5, 0.5), angle=math.pi)
+        elif self.state == 'devant deuxième feu' and msg.name == 'goto done':
+            self.state = 'prendre deuxième feu'
+            self.asserv.catch_arm(1)
+        elif self.state == 'prendre deuxième feu' and msg.name == 'caught':
+            self.state = 'pose feux'
+            self.create_send_internal('goto', position=(1.58, 0.18), angle=0.8)
+        elif self.state == 'pose feux' and msg.name == 'goto done':
+            self.state = 'pose feu 1'
+            self.asserv.pull_arm(1)
+
+        elif self.state == 'pose feu 1' and msg.name == 'put':
             self.state = 'fruits 2 avant'
             self.create_send_internal('goto', position=(1.67, 0.4), angle=math.pi/2)
         elif self.state == 'fruits 2 avant' and msg.name == 'goto done':
