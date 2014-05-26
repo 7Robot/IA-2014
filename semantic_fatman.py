@@ -69,7 +69,10 @@ class Asserv(Proto):
         ("vTheta", "f")
         ])
 
+########## Message de debut de match et autres ###########
 
+    start = Packet(49, "pic", [("color", "i")]) 
+    
 ######################   AX12   #####################
     init_arm = Packet(50, "arm", [
         ("choix", "H")
