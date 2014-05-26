@@ -12,7 +12,7 @@ class Turn(Mission):
             self.state = "turning"
 
         elif (self.state == "turning"):
-            if msg.board == "asserv" and msg.name == 'done'):
+            if (msg.board == "asserv" and msg.name == 'done'):
                 self.target = None
                 self.axe = None
                 self.state = "off"

@@ -1,14 +1,14 @@
 #/usr/bin/python
 
 from missions.mission import Mission
-from logging
+import logging
 
 class Capteurs(Mission):
     def __init__(self, robot, boardth):
         super(Capteurs, self).__init__(robot, boardth)
         self.name = 'Capteurs'
 
-    def go(self, msg, state):
+    def go(self, msg):
         logging.warn("Starting mission %s" % self.name)
         if self.state == 'on':
             if (msg.board == 'asserv' and msg.name == 'sick'):

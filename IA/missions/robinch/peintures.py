@@ -14,4 +14,5 @@ class Peintures(Mission):
             self.create_send_internal('forward', target=1, axe='x')
 
         elif (self.state == 'on' and msg.board == 'internal' and msg.name == 'forward_done'):
+            pass
 
