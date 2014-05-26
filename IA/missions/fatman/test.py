@@ -34,7 +34,7 @@ class Test(Mission):
             self.state = 'pose feu 1'
             self.asserv.pull_arm(1)
 
-        elif self.state == 'pose feu 1' and msg.name == 'put':
+        elif self.state == 'pose feu 1' and msg.name == 'laid':
             self.state = 'fruits 2 avant'
             self.create_send_internal('goto', position=(1.67, 0.4), angle=math.pi/2)
         elif self.state == 'fruits 2 avant' and msg.name == 'goto done':

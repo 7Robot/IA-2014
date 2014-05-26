@@ -34,6 +34,7 @@ class Common(Proto):
 class Asserv(Proto):
     type = 2
 
+######################   Asserve   #####################
     stop = Packet(1, "arm")
     ausecours = Packet(1, "arm")
     block = Packet(2, "arm")
@@ -68,6 +69,11 @@ class Asserv(Proto):
         ("vTheta", "f")
         ])
 
+########## Message de debut de match et autres ###########
+
+    start = Packet(49, "pic", [("color", "i")]) 
+    
+######################   AX12   #####################
     init_arm = Packet(50, "arm", [
         ("choix", "H")
         ])
@@ -79,7 +85,6 @@ class Asserv(Proto):
       ])
     
     
-    
     stock_arm = Packet(53, "arm", [
         ("choix", "H")
         ])
@@ -89,17 +94,20 @@ class Asserv(Proto):
     push_arm = Packet(55, "arm", [
         ("choix", "H")
         ])
-    launch_net = Packet(56, "arm")
+    laid = Packet(56, "pic")
 
-    convoyer = Packet(57, "arm")
+
+    launch_net = Packet(60, "arm")
+
+    convoyer = Packet(61, "arm")
 
 
 
       #### Message pour sick
 
-    sick = Packet(61, 'pic', [("id", "B")])
-    freepath = Packet(62, 'pic', [("id", "B")])
-    sickThreshold = Packet(63, 'arm', [
+    sick = Packet(91, 'pic', [("id", "B")])
+    freepath = Packet(92, 'pic', [("id", "B")])
+    sickThreshold = Packet(93, 'arm', [
         ("id", "B"),
         ('threshold', "H")
         ])
