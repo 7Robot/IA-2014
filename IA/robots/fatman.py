@@ -8,7 +8,7 @@ class Fatman:
         self.transmitter = 'arm'
         self.boards  = { "Asserv": 1302}
         self.semantic = '../semantic_fatman.py'
-        self.host = 'fatman'
+        self.host = '192.168.1.69'
         self.queue = Queue()
 
         self.sensor_front = None 
