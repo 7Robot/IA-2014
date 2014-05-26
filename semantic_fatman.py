@@ -101,6 +101,8 @@ class Asserv(Proto):
 
     convoyer = Packet(61, "arm")
 
+    slight_convoyer = Packet(62, "arm")
+
 
 
       #### Message pour sick
