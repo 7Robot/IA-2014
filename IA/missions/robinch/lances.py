@@ -10,9 +10,9 @@ class Lances(Mission):
         self.balls = 0
 
     def go(self, msg):
-        if (self.state = 'off' and msg.board == 'internal' and msg.name == 'beginlances'):
+        if (self.state = 'off' and msg.board == 'internal' and msg.name == 'beginLances'):
             self.state = 'on'
-            self.create_send_internal('forward', target=0.62, axe='x')
+            self.create_send_internal('forward', target=-0.930, axe='x')
 
         elif (self.state == 'on' and msg.board == 'internal' and msg.name == 'forward_done'):
             self.asserv.odoBroadcastOn()
