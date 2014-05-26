@@ -34,6 +34,7 @@ class IA:
         while True:
             try:
                 m = self.get_msg()
+                logging.warn("msg:%s" % m.name)
                 for mission in self.missions:
                     mission.go(m)
 

@@ -216,6 +216,7 @@ class Asserv(Proto):
         ("amount", "H")
         ])
     doneLaunch = Packet(72, "pic")
+    doneBall = Packet(75, "pic")
     stopLaunch = Packet(73, "arm")
     
 

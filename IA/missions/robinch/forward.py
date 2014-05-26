@@ -8,7 +8,7 @@ class Forward(Mission):
         self.target = None
         self.axe = None
         
-    def walk(axe, target):
+    def walk(self, axe, target):
         if (axe == 'x'):
             self.asserv.reachX(target, 0.1, 0.1)
         elif (axe == 'y'):

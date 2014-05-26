@@ -3,7 +3,7 @@
 class Msg:
     def __init__(self, board, name, args=None):
         self.board = board.lower()
-        self.name = name.lower()
+        self.name = name
         self.args = args
 
     def __getattr__(self, attr):
