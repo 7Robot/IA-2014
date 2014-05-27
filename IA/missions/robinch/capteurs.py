@@ -13,14 +13,14 @@ class Capteurs(Mission):
         if self.state == 'on':
             if (msg.board == 'asserv' and msg.name == 'sick'):
                 if msg.id == 0:
-                    self.create_send_internal('alert', id=0)
+                    self.create_send_internal('alert', id='front')
                 elif msg.id == 1:
-                    self.create_send_internal('alert', id=1)
+                    self.create_send_internal('alert', id='back')
             elif (msg.board == 'asserv' and msg.name == 'freepath'):
                 if msg.id == 0:
-                    self.create_send_internal('freepath', id=0)
+                    self.create_send_internal('freepath', id='front')
                 elif msg.id == 1:
-                    self.create_send_internal('freepath', id=1)
+                    self.create_send_internal('freepath', id='back')
         elif self.state == 'off':
             self.state = 'on'
  
