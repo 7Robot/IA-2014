@@ -23,9 +23,15 @@ class WaitForSignal(Mission):
             self.create_send_internal('beginLances')
 
         elif (self.state =='lances' and msg.board == 'internal' and msg.name == 'endLances'):
-            #self.create_send_internal('beginPeintures')
-            state = 'off'
+            self.create_send_internal('beginPeintures')
+            self.state = 'baroud'
 
+        elif (self.state =='baroud' and msg.board == 'internal' and msg.name == 'endPeintures'):
+            self.create_send_internal('beginBaroud')
+            self.state = 'fin'
+            
+        elif (self.state =='fin' and msg.board == 'internal' and msg.name == 'endBaroud'):
+            self.create_send_internal('fin_du_match')
 
         elif (msg.board == "internal" and msg.name == "fin_du_match"):
             logging.warn("End of match, stopping robot ...")
