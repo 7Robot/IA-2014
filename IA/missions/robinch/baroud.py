@@ -15,6 +15,8 @@ class Baroud(Mission):
     def go(self, msg):
         if (self.state == 'off' and msg.board == 'internal' and msg.name == 'beginBaroud'):
             self.state = 'on'
+            if Mission.data['color'] == 'rouge':
+                self.moumouth = Vertex(-0.73, 1) 
             self.create_send_internal('forward', target=0.735, axe='y')
 
         elif (self.state == 'on' and msg.board == 'internal' and msg.name == 'forward_done'):
