@@ -40,7 +40,10 @@ class Lances(Mission):
                 self.state = 'turn_speed'
 
         elif self.state == 'turn_speed' and msg.name == 'turn_done':
-            self.pos = self.pos+0.05
+            if Mission.data['color'] == 'rouge':
+                self.pos = self.pos - 0.05
+            elif Mission.data['color'] == 'jaune':
+                self.pos = self.pos + 0.05
             self.create_send_internal('forward', target=self.pos, axe='x')
             self.state = 'speed_lances'
 
