@@ -1,4 +1,4 @@
-#/usr/bin/python
+#!/usr/bin/python
 import logging
 from msg.msg import Msg, InternalMsg
 import threading
