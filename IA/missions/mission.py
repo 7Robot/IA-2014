@@ -19,8 +19,9 @@ class Mission:
         return self._state
 
     def _set_state(self, state):
-        logging.warn("[%s:state] %s -> %s" %(self.__class__.__name__, self.state, state))
-        self._state = state
+        if state != self._state:
+            logging.warn("[%s:state] %s -> %s" %(self.__class__.__name__, self.state, state))
+            self._state = state
     
     state = property(_get_state, _set_state)
 
@@ -46,3 +47,11 @@ class Mission:
 
     def go(self, msg):
         raise NotImplementedError()
+
+
+class StopMission(Mission):
+    def go(self, msg):
+        if msg.name == 'force off':
+            self.state = 'off'
+            return
+        super().go(self, msg)
