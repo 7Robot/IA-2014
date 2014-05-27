@@ -2,6 +2,15 @@ from missions.mission import Mission
 import logging
 from time import sleep
 
+
+def inverser(fonction):
+    def fonction2(self, axe, target):
+        if Mission.data['color'] == 'rouge' and axe =='x':
+            target = -target
+        fonction(self, axe, target)
+    return fonction2
+    
+
 class Forward(Mission):
     def __init__(self, robot, boardth):
         super(Forward, self).__init__(robot, boardth)
@@ -9,6 +18,7 @@ class Forward(Mission):
         self.target = None
         self.axe = None
         
+    @inverser
     def walk(self, axe, target):
         if (axe == 'x'):
             self.asserv.reachX(target, 0.1, 0.05)
