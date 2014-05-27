@@ -47,11 +47,3 @@ class Mission:
 
     def go(self, msg):
         raise NotImplementedError()
-
-
-class StopMission(Mission):
-    def go(self, msg):
-        if msg.name == 'force off':
-            self.state = 'off'
-            return
-        super().go(self, msg)

@@ -13,29 +13,28 @@ class Goto(Mission):
             self.angle = msg.angle if self.robot.color == 1 else -msg.angle
             self.asserv.motion_pos(self.position[0], self.position[1])
             try:
-                self.nosick = msg.nosick
+                self.nosick = set(msg.nosick)
             except:
                 self.nosick = set()
             self.state = "going"
         
-        elif self.state == "going":
-            if msg.board == "asserv" and msg.name == 'sick' and msg.id not in self.nosick:
-                self.sicks.add(msg.id)
+        elif msg.board == "asserv" and msg.name == 'sick':
+            self.sicks.add(msg.id)
+            if self.state == 'going' and self.sicks > self.nosick:
                 self.asserv.block()
                 self.state = "waiting"
-            elif msg.board == "asserv" and msg.name == 'done':
-                self.asserv.motion_angle(self.angle)
-                self.state = 'turning'
 
-        elif self.state == 'turning':
-            if msg.board == 'asserv' and msg.name == 'done':
-                self.state = "off"
-                self.create_send_internal('goto done')
+        elif self.state == 'going' and msg.board == "asserv" and msg.name == 'done':
+            self.asserv.motion_angle(self.angle)
+            self.state = 'turning'
+
+        elif self.state == 'turning' and msg.board == 'asserv' and msg.name == 'done':
+            self.state = "off"
+            self.create_send_internal('goto done')
                 
-        elif self.state == "waiting":
-            if msg.board == 'asserv' and msg.name == 'freepath':
-                self.sicks.remove(msg.id)
-                if not self.sicks:
-                    self.asserv.motion_pos(self.position[0], self.position[1])
-                    self.state = "going"
+        elif msg.board == 'asserv' and msg.name == 'freepath':
+            self.sicks.remove(msg.id)
+            if not self.sicks and self.state == 'waiting':
+                self.asserv.motion_pos(self.position[0], self.position[1])
+                self.state = "going"
                 
