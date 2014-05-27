@@ -1,5 +1,6 @@
 from missions.mission import Mission
 import logging
+from time import sleep
 
 class Forward(Mission):
     def __init__(self, robot, boardth):
@@ -10,9 +11,9 @@ class Forward(Mission):
         
     def walk(self, axe, target):
         if (axe == 'x'):
-            self.asserv.reachX(target, 0.1, 0.1)
+            self.asserv.reachX(target, 0.1, 0.05)
         elif (axe == 'y'):
-            self.asserv.reachY(target, 0.1, 0.1)
+            self.asserv.reachY(target, 0.1, 0.05)
         
     def go(self, msg):
         if (msg.board == "internal" and msg.name == 'forward'):
@@ -23,7 +24,7 @@ class Forward(Mission):
         
         elif (self.state == "forward"):
             if (msg.board == "internal" and msg.name == 'alert'):
-                self.asserv.stop()
+                self.asserv.block()
                 self.state = "waiting"
             elif (msg.board == "asserv" and msg.name == 'done'):
                 self.target = None

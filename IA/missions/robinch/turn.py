@@ -8,7 +8,7 @@ class Turn(Mission):
         
     def go(self, msg):
         if (msg.board == "internal" and msg.name == 'turn'):
-            self.asserv.reachTheta(msg.target, 0.1, 0.1)
+            self.asserv.reachTheta(msg.target, 0.2, 0.05)
             self.state = "turning"
 
         elif (self.state == "turning"):
@@ -16,3 +16,4 @@ class Turn(Mission):
                 self.target = None
                 self.axe = None
                 self.state = "off"
+                self.create_send_internal('turn_done')
