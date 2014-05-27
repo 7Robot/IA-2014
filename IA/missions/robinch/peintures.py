@@ -39,6 +39,9 @@ class Peintures(Mission):
             
         elif (self.state == 'ackbar' and msg.board == 'internal' and msg.name == 'forward_done'):
             self.create_send_internal('turn', target=-pi/2)
+            
+        elif (self.state == 'ackbar' and msg.board == 'internal' and msg.name =='turn_done'):
+            self.create_send_internal('endPeintures')
             self.state = 'off'
             
         
