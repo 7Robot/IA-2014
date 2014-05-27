@@ -71,7 +71,7 @@ class Asserv(Proto):
 
 ########## Message de debut de match et autres ###########
 
-    start = Packet(49, "pic", [("color", "H")]) 
+    start = Packet(49, "pic", [("color", "H")]) # 0 -> jaune, 1 -> rouge
     
 ######################   AX12   #####################
     init_arm = Packet(50, "arm", [
