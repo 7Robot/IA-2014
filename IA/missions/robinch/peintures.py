@@ -37,4 +37,8 @@ class Peintures(Mission):
         elif (self.state == 'ackbar' and msg.board == 'internal' and msg.name =='its_a_trap'):
             self.create_send_internal('forward', target=0.980, axe='y')
             
+        elif (self.state == 'ackbar' and msg.board == 'internal' and msg.name == 'forward_done'):
+            self.create_send_internal('turn', target=-pi/2)
+            self.state = 'off'
+            
         
