@@ -52,6 +52,8 @@ class Asserv(Proto):
         ("theta", "f")
         ])
 
+    blocked = Packet(20, "pic")
+
     setPos = Packet(30, "arm", [
         ("x", "f"),
         ("y", "f"),
