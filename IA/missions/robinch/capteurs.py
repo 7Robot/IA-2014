@@ -9,7 +9,6 @@ class Capteurs(Mission):
         self.name = 'Capteurs'
 
     def go(self, msg):
-        logging.warn("Starting mission %s" % self.name)
         if self.state == 'on':
             if (msg.board == 'asserv' and msg.name == 'sick'):
                 if msg.id == 0:
@@ -21,6 +20,11 @@ class Capteurs(Mission):
                     self.create_send_internal('freepath', id='front')
                 elif msg.id == 1:
                     self.create_send_internal('freepath', id='back')
-        elif self.state == 'off':
+        elif self.state == 'off' and msg.name == 'beginSick':
             self.state = 'on'
- 
+
+        elif (msg.board == "internal" and msg.name == "fin_du_match"):
+            self.state = 'off'
+
+        elif self.state == 'on' and msg.name == 'blindSick':
+            self.state = 'off'

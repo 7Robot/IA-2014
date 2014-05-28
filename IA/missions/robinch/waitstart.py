@@ -16,21 +16,22 @@ class WaitForSignal(Mission):
             self.asserv.setBalls(6)
             if msg.color == 0:
                 Mission.data['color'] = 'rouge'
-                self.asserv.setXYTheta(1.330, 0.475, pi)
+                self.asserv.setXYTheta(1.330, 0.482, pi)
             elif msg.color == 1:
                 Mission.data['color'] = 'jaune'
                 self.asserv.setXYTheta(-1.330, 0.475, pi)
+            self.create_send_internal('beginSick')
             self.create_send_internal('beginLances')
 
         elif (self.state =='lances' and msg.board == 'internal' and msg.name == 'endLances'):
-            self.create_send_internal('beginPeintures')
+            self.create_send_internal('beginBaroud')
             self.state = 'baroud'
 
-        elif (self.state =='baroud' and msg.board == 'internal' and msg.name == 'endPeintures'):
-            self.create_send_internal('beginBaroud')
+        elif (self.state =='baroud' and msg.board == 'internal' and msg.name == 'endBaroud'):
+            self.create_send_internal('beginPeintures')
             self.state = 'fin'
             
-        elif (self.state =='fin' and msg.board == 'internal' and msg.name == 'endBaroud'):
+        elif (self.state =='fin' and msg.board == 'internal' and msg.name == 'endPeintures'):
             self.create_send_internal('fin_du_match')
 
         elif (msg.board == "internal" and msg.name == "fin_du_match"):

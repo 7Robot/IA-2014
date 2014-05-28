@@ -17,7 +17,7 @@ class Baroud(Mission):
             self.state = 'on'
             if Mission.data['color'] == 'rouge':
                 self.moumouth = Vertex(-0.73, 1) 
-            self.create_send_internal('forward', target=0.735, axe='y')
+            self.create_send_internal('forward', target=-0.12, axe='x')
 
         elif (self.state == 'on' and msg.board == 'internal' and msg.name == 'forward_done'):
             self.asserv.getPos()
@@ -25,7 +25,7 @@ class Baroud(Mission):
         elif (self.state == 'on' and msg.board == 'asserv' and msg.name == 'pos'):
             self.state = 'allyourbasearebelongtous'
             self.pos = Vertex(msg.x, msg.y)
-            angle_tir = pi/2 - angle(self.pos, self.moumouth)
+            angle_tir = angle(self.pos, self.moumouth)+pi/2
             self.create_send_internal('turn', target=angle_tir)
         
         elif (self.state == 'allyourbasearebelongtous' and msg.board == 'internal' and msg.name == 'turn_done'):
@@ -36,3 +36,7 @@ class Baroud(Mission):
             self.asserv.stopLaunch()
             self.state = 'off'
             self.create_send_internal('endBaroud')
+
+        elif (msg.board == "internal" and msg.name == "fin_du_match"):
+            self.state = 'off'
+

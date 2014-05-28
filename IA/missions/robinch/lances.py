@@ -9,6 +9,7 @@ class Lances(Mission):
         super(Lances, self).__init__(robot, boardth)
         self.name = 'Lances'
         self.pos = 0
+        self.doneball = 0
 
     def go(self, msg):
         if (self.state == 'off' and msg.board == 'internal' and msg.name == 'beginLances'):
@@ -23,24 +24,31 @@ class Lances(Mission):
         elif (self.state == 'turn' and msg.board == 'internal' and msg.name == 'turn_done'): 
             self.asserv.launchBalls(1)
             self.state = "speed_lances"
+            self.create_send_internal('forward', target=self.pos+0.05, axe='x')
 
         elif (self.state == 'alert' and msg.board == 'internal' and msg.name == 'freepath'): 
             self.asserv.launchBalls(1)
             self.state = 'speed_lances'
 
-        elif self.state == "speed_lances":
-            if (msg.board == 'asserv' and msg.name == 'doneLaunch'):
-                self.asserv.stop()
-                self.asserv.stopLaunch()
-                self.state = 'off'
-                self.create_send_internal('endLances')
-           
-            elif (msg.board == 'asserv' and msg.name == 'doneBall'):
+        elif self.state == "speed_lances":              
+            if msg.name == 'forward_done':
                 self.create_send_internal('turn', target=pi)
                 self.state = 'turn_speed'
+            elif msg.name == 'doneLaunch':
+                self.state = 'ending'
+                
+        elif self.state == 'turn_speed':
+            if msg.name == 'turn_done':
+                self.create_send_internal('forward', target=self.pos+0.10, axe='x')
+                self.state = 'speed_lances'
+            elif msg.name == 'doneLaunch':
+                self.state = 'ending'
 
-        elif self.state == 'turn_speed' and msg.name == 'turn_done':
-            self.pos = self.pos + 0.05
-            self.create_send_internal('forward', target=self.pos, axe='x')
-            self.state = 'speed_lances'
+        elif self.state == 'ending' and msg.name == 'done':
+            self.asserv.stopLaunch()
+            self.create_send_internal('endLances')
+
+
+        elif (msg.board == "internal" and msg.name == "fin_du_match"):
+            self.state = 'off'
 

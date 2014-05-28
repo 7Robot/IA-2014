@@ -52,3 +52,6 @@ class Forward(Mission):
                 self.state = "off"
                 self.create_send_internal('forward_done')
 
+        elif (msg.board == "internal" and msg.name == "fin_du_match"):
+            self.state = 'off'
+

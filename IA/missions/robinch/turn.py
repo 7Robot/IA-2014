@@ -17,3 +17,7 @@ class Turn(Mission):
                 self.axe = None
                 self.state = "off"
                 self.create_send_internal('turn_done')
+
+        elif (msg.board == "internal" and msg.name == "fin_du_match"):
+            self.state = 'off'
+
