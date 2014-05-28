@@ -20,39 +20,13 @@ class Test(Mission):
             self.state = 'demi tour 1'
             self.create_send_internal('goto', position=(0.95, 0.05), angle=0)
         elif self.state == 'demi tour 1' and msg.name == 'goto done':
-            self.state = 'fruits 1'
-            self.create_send_internal('goto', position=(1.4, 0.04), angle=0)
-        elif self.state == 'fruits 1' and msg.name == 'goto done':
-            self.state = 'devant deuxième feu'
-            self.create_send_internal('goto', position=(1.5, 0.5), angle=math.pi)
-        elif self.state == 'devant deuxième feu' and msg.name == 'goto done':
-            self.state = 'prendre deuxième feu'
-            self.asserv.catch_arm(1 + (1 - self.robot.color))
-        elif self.state == 'prendre deuxième feu' and msg.name == 'caught':
-            self.state = 'pose feux'
-            self.create_send_internal('goto', position=(1.62, 0.14), angle=0.8)
-        elif self.state == 'pose feux' and msg.name == 'goto done':
-            self.state = 'pose feu 1'
-            self.asserv.pull_arm(1 + (1 - self.robot.color))
-        elif self.state == 'pose feu 1' and msg.name == 'laid':
-            self.state = 'demi tour feu 2'
-            self.create_send_internal('goto', position=(1.56, 0.08), angle=0.8-math.pi)
-        elif self.state == 'demi tour feu 2' and msg.name == 'goto done':
+            self.state = 'lacher 1'
             self.asserv.pull_arm(1 + self.robot.color)
-            self.state = 'pose feu 2'
-        elif self.state == 'pose feu 2' and msg.name == 'laid':
-            self.state = 'fruits 2 avant'
-            self.create_send_internal('goto', position=(1.67, 0.30), angle=math.pi/2)
-        elif self.state == 'fruits 2 avant' and msg.name == 'goto done':
-            self.state = 'fruits 2'
-            self.create_send_internal('goto', position=(1.67, 0.68), angle=math.pi)
-        elif self.state == 'fruits 2' and msg.name == 'goto done':
-            self.state = 'convoyer'
-            self.create_send_internal('convoyer')
-        elif self.state == 'convoyer' and msg.name == 'convoyer done':
-            self.state = 'filet'
-            self.create_send_internal('filet')
-        elif self.state == 'filet' and msg.board == 'internal' and msg.name == 'filet done':
+        elif self.state == 'lacher 1' and msg.name == 'laid':
+            self.state = 'ligne droite'
+            self.create_send_internal('goto', position=(1, 2), angle=0)
+        elif self.state == 'ligne droite' and msg.name == 'goto done':
             self.state = 'fini'
+
 
 # y positif ==> on s'éloigne du bord original
