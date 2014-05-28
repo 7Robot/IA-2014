@@ -35,7 +35,7 @@ class Homologation(Mission):
         elif (self.state == 'thatsitlol' and msg.board == 'asserv' and msg.name == 'doneLaunch'):
             self.asserv.stopLaunch()
             self.state = 'off'
-            self.create_send_internal('endBaroud')
+            self.create_send_internal('endHomolog')
 
         elif (msg.board == "internal" and msg.name == "fin_du_match"):
             self.state = 'off'
