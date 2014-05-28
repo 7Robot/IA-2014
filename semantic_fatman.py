@@ -103,6 +103,7 @@ class Asserv(Proto):
 
     slight_convoyer = Packet(62, "arm")
 
+    poulet = Packet(63, "arm")
 
 
       #### Message pour sick
