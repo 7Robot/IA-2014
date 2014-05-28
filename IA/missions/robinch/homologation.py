@@ -33,6 +33,10 @@ class Homologation(Mission):
             self.state = 'thatsitlol'
             
         elif (self.state == 'thatsitlol' and msg.board == 'asserv' and msg.name == 'doneLaunch'):
+            self.create_send_internal('forward', target=-0.22, axe='x')
+            self.state = 'donttouchme'
+            
+        elif (self.state == 'donttouchme' and msg.name == 'forward_done'):
             self.asserv.stopLaunch()
             self.state = 'off'
             self.create_send_internal('endHomolog')
