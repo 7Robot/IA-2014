@@ -1,3 +1,4 @@
+import logging
 from missions.mission import Mission
 
 class Goto(Mission):
@@ -33,7 +34,10 @@ class Goto(Mission):
             self.create_send_internal('goto done')
                 
         elif msg.board == 'asserv' and msg.name == 'freepath':
-            self.sicks.remove(msg.id)
+            try:
+                self.sicks.remove(msg.id)
+            except KeyError:
+                logging.warning("Freepath on an already free sick.")
             if not self.sicks and self.state == 'waiting':
                 self.asserv.motion_pos(self.position[0], self.position[1])
                 self.state = "going"
