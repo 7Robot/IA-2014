@@ -32,7 +32,6 @@ class Baroud(Mission):
             self.asserv.launchBalls(0)
             
         elif (self.state == 'allyourbasearebelongtous' and msg.board == 'asserv' and msg.name == 'doneLaunch'):
-            self.asserv.stop()
             self.asserv.stopLaunch()
             self.state = 'off'
             self.create_send_internal('endBaroud')
