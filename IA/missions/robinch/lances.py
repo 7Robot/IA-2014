@@ -22,29 +22,29 @@ class Lances(Mission):
             self.state = 'turn'
 
         elif (self.state == 'turn' and msg.board == 'internal' and msg.name == 'turn_done'): 
-            self.asserv.launchBalls(1)
-            self.state = "speed_lances"
+            self.asserv.launchBalls(5)
+            self.doneball += 1
+            self.state = "forw"
+            
+        elif (self.state == 'forw' and msg.name == 'doneLaunch'):
             self.create_send_internal('forward', target=self.pos+0.05, axe='x')
-
-        elif (self.state == 'alert' and msg.board == 'internal' and msg.name == 'freepath'): 
-            self.asserv.launchBalls(1)
-            self.state = 'speed_lances'
-
-        elif self.state == "speed_lances":              
-            if msg.name == 'forward_done':
-                self.create_send_internal('turn', target=pi)
-                self.state = 'turn_speed'
-            elif msg.name == 'doneLaunch':
-                self.state = 'ending'
-                
-        elif self.state == 'turn_speed':
-            if msg.name == 'turn_done':
-                self.create_send_internal('forward', target=self.pos+0.10, axe='x')
-                self.state = 'speed_lances'
-            elif msg.name == 'doneLaunch':
+            self.state = 'shoot'
+            
+        elif (self.state == 'turning' and msg.name == 'doneLaunch'):
+            self.create_send_internal('turn', target=pi)
+            self.state = 'shoot'
+            
+        elif (self.state == 'shoot' and (msg.name == 'forward_done' or msg.name == 'turn_done')): 
+            self.asserv.launchBalls((6-self.doneball)-1)
+            self.doneball += 1
+            if self.doneball == 3:
+                self.state = "turning"
+            elif (self.doneball == 1 or self.doneball == 2 or self.doneball == 4):
+                self.state = 'forw'
+            else:
                 self.state = 'ending'
 
-        elif self.state == 'ending' and msg.name == 'done':
+        elif self.state == 'ending' and msg.name == 'doneLaunch':
             self.asserv.stopLaunch()
             self.create_send_internal('endLances')
 
