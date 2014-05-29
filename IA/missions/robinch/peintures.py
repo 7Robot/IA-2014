@@ -14,13 +14,9 @@ class Peintures(Mission):
             self.state = 'on'
             self.create_send_internal('turn', target=-pi/2)
 
-        elif (self.state == 'on' and msg.board == 'internal' and msg.name == 'turn_done'):
-            self.create_send_internal('forward', target=-0.12, axe='x')
-            self.state = 'going_y'
-            
-        elif (self.state == 'going_y' and msg.board == 'internal' and msg.name =='forward_done'):
+        elif (self.state == 'on' and msg.board == 'internal' and msg.name =='turn_done'):
             self.create_send_internal('backsick')
-            self.create_send_internal('forward', target=0.550, axe='y')
+            self.create_send_internal('forward', target=0.750, axe='y')
             self.state = 'before'
             
         elif (self.state == 'before' and msg.board == 'internal' and msg.name == 'forward_done'):
