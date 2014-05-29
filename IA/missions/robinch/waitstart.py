@@ -20,8 +20,7 @@ class WaitForSignal(Mission):
             elif msg.color == 1:
                 Mission.data['color'] = 'jaune'
                 self.asserv.setXYTheta(-1.330, 0.475, pi)
-            self.create_send_internal('beginSick')
-            
+            self.create_send_internal('frontsick') 
             self.create_send_internal('beginHomolog')
             #self.create_send_internal('beginLances')
             
