@@ -46,9 +46,19 @@ class Goto(Mission):
         
         elif msg.board == "asserv" and msg.name == 'sick':
             self.sicks.add(msg.id)
-            if self.state == 'going' and self.sicks - self.nosick:
+            if self.state == 'going' and (self.sicks - self.nosick):
                 self.asserv.block()
                 self.state = "waiting"
+
+        elif msg.board == 'turret' and msg.name == 'pos':
+            if msg.distance > 6:
+                if self.state == 'going':
+                    self.asserv.block()
+                    self.state = 'waiting'
+            else:
+                if self.state == 'waiting' and not(self.sicks - self.nosick):
+                    self.state = 'going'
+                    self.asserv.motion_pos(self.position[0], self.position[1])
 
         elif self.state == 'going' and msg.board == "asserv" and msg.name == 'done':
             self.asserv.motion_angle(self.angle)
@@ -66,4 +76,3 @@ class Goto(Mission):
             if not(self.sicks - self.nosick) and self.state == 'waiting':
                 self.asserv.motion_pos(self.position[0], self.position[1])
                 self.state = "going"
-                

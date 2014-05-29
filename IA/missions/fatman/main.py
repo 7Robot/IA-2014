@@ -1,4 +1,4 @@
-#/usr/bin/python
+#!/usr/bin/python
 
 from missions.mission import Mission
 import math
@@ -40,12 +40,14 @@ class Test(Mission):
             self.asserv.catch_arm(1 + (1 - self.robot.color))
         elif self.state == 'prendre deuxième feu' and msg.name == 'caught':
             self.state = 'pose feux'
+            self.asserv.raise_arm(1 + (1 - self.robot.color))
             self.create_send_internal('goto', position=(1.64, 0.15), angle=0.7)
         elif self.state == 'pose feux' and msg.name == 'goto done':
             self.state = 'pose feu 1'
             self.asserv.pull_arm(1 + (1 - self.robot.color))
         elif self.state == 'pose feu 1' and msg.name == 'laid':
             self.state = 'demi tour feu 2'
+            self.asserv.raise_arm(1 + self.robot.color)
             self.create_send_internal('goto', position=(1.56, 0.07), angle=0.8-math.pi)
         elif self.state == 'demi tour feu 2' and msg.name == 'goto done':
             self.asserv.pull_arm(1 + self.robot.color)
@@ -70,6 +72,7 @@ class Test(Mission):
             self.asserv.catch_arm(1 + self.robot.color)
         elif self.state == 'prendre quatrième feu' and msg.name == 'caught':
             self.state = 'vers foyer du milieu'
+            self.asserv.raise_arm(1 + self.robot.color)
             self.create_send_internal('goto', position=(1.2, 1.53), angle=-0.8)
         elif self.state == 'vers foyer du milieu' and msg.name == 'goto done':
             self.state = 'pose feu 3'
@@ -79,6 +82,7 @@ class Test(Mission):
             self.create_send_internal('goto', position=(1.4, 1.25), angle=math.pi)
         elif self.state == 'après pose feu 3' and msg.name == 'goto done':
             self.state = 'avant pose feu 4'
+            self.asserv.raise_arm(1 + (1 - self.robot.color))
             self.create_send_internal('goto', position=(1.18, 1.06), angle=-2.36)
         elif self.state == 'avant pose feu 4' and msg.name == 'goto done':
             self.state = 'pose feu 4'
