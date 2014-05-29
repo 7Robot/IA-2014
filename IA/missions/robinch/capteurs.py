@@ -12,7 +12,7 @@ class Capteurs(Mission):
         if self.state == 'frontsick':
             if (msg.board == 'asserv' and msg.name == 'sick' and msg.id == 0):
                 self.create_send_internal('alert', id='front')
-             elif (msg.board == 'asserv' and msg.name == 'freepath' and msg.id == 0):
+            elif (msg.board == 'asserv' and msg.name == 'freepath' and msg.id == 0):
                 self.create_send_internal('freepath', id='front')
 
         elif self.state == 'backsick':
