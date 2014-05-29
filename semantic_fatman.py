@@ -98,7 +98,7 @@ class Asserv(Proto):
         ])
     laid = Packet(56, "pic")
     raise_arm = Packet(57, "arm", [
-        ("choix", H)
+        ("choix", "H")
         ])
 
 
@@ -133,6 +133,20 @@ class Asserv(Proto):
 #    odoDelay = Packet(46, "arm", [("delay", "I")])
 
 
+class Turret(Proto):
+    type = 8
+    on = Packet(1, "arm")
+    off = Packet(2, "arm")
+    getPos = Packet(10, "arm", [
+        ("id", "B")
+    ])
+    pos = Packet(11, "pic", [
+        ("id", "B"),
+        ("distance", "B"),
+        ("angle", "B")
+    ])
+
+
 # Rappel des types struct.pack usuelles :
 # B  unsigned char
 # H  unsigned short
@@ -141,3 +155,4 @@ class Asserv(Proto):
 # h  signed short
 # i  signed int
 # f  float
+
