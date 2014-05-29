@@ -97,6 +97,9 @@ class Asserv(Proto):
         ("choix", "H")
         ])
     laid = Packet(56, "pic")
+    prepare_pose = Packet(57, "arm", [
+        ("choix", H)
+        ])
 
 
     launch_net = Packet(60, "arm")
