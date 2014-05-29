@@ -29,7 +29,7 @@ class Goto(Mission):
 
             # calcul de la façon dont on va s'orienter pour trouver les sicks utiles
             angle = math.atan2(self.position[1] - self.last_position[1], self.position[0] - self.last_position[0])
-            self.nosick = SICKS_FRONT if abs(angle - self.last_angle) < math.pi / 2 else SICKS_BACK
+            self.nosick = SICKS_BACK if abs(angle - self.last_angle) < math.pi / 2 else SICKS_FRONT
             try:
                 self.nosick.update(msg.nosick)
             except:
