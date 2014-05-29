@@ -42,7 +42,7 @@ class Goto(Mission):
         
         elif msg.board == "asserv" and msg.name == 'sick':
             self.sicks.add(msg.id)
-            if self.state == 'going' and self.sicks > self.nosick:
+            if self.state == 'going' and self.sicks - self.nosick:
                 self.asserv.block()
                 self.state = "waiting"
 
