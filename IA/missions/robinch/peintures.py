@@ -16,7 +16,7 @@ class Peintures(Mission):
 
         elif (self.state == 'on' and msg.board == 'internal' and msg.name =='turn_done'):
             self.create_send_internal('backsick')
-            self.create_send_internal('forward', target=0.750, axe='y')
+            self.create_send_internal('forward', target=0.550, axe='y')
             self.state = 'before'
             
         elif (self.state == 'before' and msg.board == 'internal' and msg.name == 'forward_done'):
@@ -25,8 +25,8 @@ class Peintures(Mission):
             self.state = 'pinage'
 
         elif (self.state == 'pinage' and msg.board == 'internal' and msg.name =='turn_done'):
-            self.create_timer(3.0, 'end_pinage')
-            self.create_send_internal('forward', target=1, axe='y')
+            self.create_timer(4.0, 'end_pinage')
+            self.create_send_internal('forward', target=0.980, axe='y')
             
         elif (self.state == 'pinage' and msg.board == 'internal' and msg.name == 'end_pinage'):
             self.asserv.stop()
