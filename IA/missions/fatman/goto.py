@@ -34,6 +34,9 @@ class Goto(Mission):
             except:
                 pass
 
+            self.last_position = self.position
+            self.last_angle = self.angle
+
             self.asserv.motion_pos(self.position[0], self.position[1])
             self.state = "going"
         
