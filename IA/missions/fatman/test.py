@@ -15,7 +15,7 @@ class Test(Mission):
 
         if msg.board == 'asserv' and msg.name == 'start':
             self.robot.color = msg.color
-            self.asserv.setPos(0, 0, math.pi)
+            self.create_send_internal('reset goto')
             self.create_send_internal('goto', position=(0.7, 0.05), angle=math.pi)
             self.state = 'sortie'
         elif self.state == 'sortie' and msg.board == 'internal' and msg.name == 'goto done':
@@ -59,5 +59,3 @@ class Test(Mission):
             self.create_send_internal('filet')
         elif self.state == 'filet' and msg.board == 'internal' and msg.name == 'filet done':
             self.state = 'fini'
-
-# y positif ==> on s'éloigne du bord original
