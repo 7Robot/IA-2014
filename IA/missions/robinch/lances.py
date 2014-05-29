@@ -14,7 +14,7 @@ class Lances(Mission):
     def go(self, msg):
         if (self.state == 'off' and msg.board == 'internal' and msg.name == 'beginLances'):
             self.state = 'on'
-            self.pos = -0.875
+            self.pos = -0.870
             self.create_send_internal('forward', target=self.pos, axe='x')
 
         elif (self.state == 'on' and msg.board == 'internal' and msg.name == 'forward_done'):
