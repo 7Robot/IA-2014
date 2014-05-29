@@ -47,11 +47,25 @@ class Test(Mission):
             self.state = 'pose feu 2'
         elif self.state == 'pose feu 2' and msg.name == 'laid':
             self.state = 'fruits 2 avant'
-            self.create_send_internal('goto', position=(1.67, 0.30), angle=math.pi/2)
+            self.create_send_internal('goto', position=(1.68, 0.30), angle=math.pi/2)
         elif self.state == 'fruits 2 avant' and msg.name == 'goto done':
             self.state = 'fruits 2'
-            self.create_send_internal('goto', position=(1.67, 0.68), angle=math.pi)
+            self.create_send_internal('goto', position=(1.68, 1.1), angle=math.pi/2)
         elif self.state == 'fruits 2' and msg.name == 'goto done':
+            self.state = 'prendre troisième feu'
+            self.asserv.catch_arm(1 + (1 - self.robot.color))
+        elif self.state == 'prendre troisième feu' and msg.name == 'caught':
+            self.state = 'avant quatrième feu'
+            self.create_send_internal('goto', position=(1.68, 1.4), angle=-math.pi/2)
+        elif self.state == 'avant quatrième feu' and msg.name == 'goto done':
+            self.state = 'prendre quatrième feu'
+            self.asserv.catch_arm(1 + self.robot.color)
+        elif self.state == 'prendre quatrième feu' and msg.name == 'caught':
+            self.state = 'vers foyer du milieu'
+            self.create_send_internal('goto', position=(1.2, 1.25), angle=math.pi/2)
+        elif self.state == 'vers foyer du milieu' and msg.name == 'goto done':
+            pass
+
             self.state = 'convoyer'
             self.create_send_internal('convoyer')
         elif self.state == 'convoyer' and msg.name == 'convoyer done':
