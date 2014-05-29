@@ -43,7 +43,7 @@ class Forward(Mission):
                 self.create_send_internal('forward_done')
                 
         elif (self.state == "waiting"):
-            if (msg.board == 'asserv' and msg.name == 'freepath'):
+            if (msg.board == 'internal' and msg.name == 'freepath'):
                 self.walk(self.axe, self.target)
                 self.state = "forward"
             elif (msg.board == "asserv" and msg.name == 'done'):
