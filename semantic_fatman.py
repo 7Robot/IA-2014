@@ -59,7 +59,8 @@ class Asserv(Proto):
         ])
     motion_push = Packet(14, "arm", [
         ("x", "f"),
-        ("y", "f")
+        ("y", "f"),
+        ("d", "f")
         ])
 
     blocked = Packet(20, "pic")
