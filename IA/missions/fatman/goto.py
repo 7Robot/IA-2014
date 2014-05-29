@@ -16,6 +16,9 @@ class Goto(Mission):
         self.nosick = set()
         
     def go(self, msg):
+        if self.robot.stopped:
+            return
+
         if msg.name == 'reset goto':
             self.last_position = (0, 0)
             self.last_angle = math.pi
