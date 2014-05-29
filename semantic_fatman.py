@@ -97,7 +97,7 @@ class Asserv(Proto):
         ("choix", "H")
         ])
     laid = Packet(56, "pic")
-    prepare_pose = Packet(57, "arm", [
+    raise_arm = Packet(57, "arm", [
         ("choix", H)
         ])
 
