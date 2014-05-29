@@ -62,7 +62,7 @@ class Goto(Mission):
                 self.sicks.remove(msg.id)
             except KeyError:
                 logging.warning("Freepath on an already free sick.")
-            if not(self.sick - self.nosick) and self.state == 'waiting':
+            if not(self.sicks - self.nosick) and self.state == 'waiting':
                 self.asserv.motion_pos(self.position[0], self.position[1])
                 self.state = "going"
                 
