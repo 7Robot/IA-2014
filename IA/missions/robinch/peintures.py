@@ -32,9 +32,8 @@ class Peintures(Mission):
             self.asserv.stop()
             self.state = 'ackbar'
             self.create_send_internal('frontsick')
-            self.create_send_internal('its_a_trap')
             
-        elif (self.state == 'ackbar' and msg.board == 'internal' and msg.name =='its_a_trap'):
+        elif (self.state == 'ackbar' and msg.board == 'asserv' and msg.name =='done'):
             self.create_send_internal('forward', target=0.950, axe='y')
             
         elif (self.state == 'ackbar' and msg.board == 'internal' and msg.name == 'forward_done'):
