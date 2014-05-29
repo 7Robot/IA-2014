@@ -26,7 +26,7 @@ class Test(Mission):
             self.create_send_internal('goto', position=(0.95, 0.05), angle=0)
         elif self.state == 'demi tour 1' and msg.name == 'goto done':
             self.state = 'fruits 1'
-            self.create_send_internal('goto', position=(1.4, 0.04), angle=0)
+            self.create_send_internal('goto', position=(1.45, 0.04), angle=0)
         elif self.state == 'fruits 1' and msg.name == 'goto done':
             self.state = 'devant deuxième feu'
             self.create_send_internal('goto', position=(1.5, 0.51), angle=math.pi)
