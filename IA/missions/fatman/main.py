@@ -16,6 +16,10 @@ class Test(Mission):
 
         if msg.board == 'asserv' and msg.name == 'start':
             self.robot.color = msg.color
+            self.create_timer(3, 'timer start')
+            self.create_timer(92, 'funny action')
+            self.state = 'waiting for start'
+        elif msg.name == 'timer start' and self.state == 'waiting for start':
             self.create_send_internal('reset goto')
             self.create_send_internal('goto', position=(0.7, 0.05), angle=math.pi)
             self.state = 'sortie'
@@ -94,6 +98,4 @@ class Test(Mission):
         elif self.state == 'convoyer' and msg.name == 'done':
             self.state = 'filet'
             self.create_send_internal('filet')
-        elif self.state == 'filet' and msg.board == 'internal' and msg.name == 'filet done':
-            self.state = 'fini'
 
