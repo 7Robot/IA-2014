@@ -22,8 +22,8 @@ class WaitForSignal(Mission):
                 Mission.data['color'] = 'jaune'
                 self.asserv.setXYTheta(-1.330, 0.475, pi)
                 self.create_send_internal('frontsick') 
-            self.create_send_internal('beginHomolog')
-            #self.create_send_internal('beginLances')
+            #self.create_send_internal('beginHomolog')
+            self.create_send_internal('beginLances')
             
         elif (self.state =='lances' and msg.board == 'internal' and msg.name == 'endHomolog'):
             self.create_send_internal('fin_du_match')
