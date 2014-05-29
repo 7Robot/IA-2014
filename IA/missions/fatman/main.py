@@ -28,7 +28,7 @@ class Test(Mission):
             self.asserv.catch_arm(1 + self.robot.color)
         elif self.state == 'prendre premier feu' and msg.name == 'caught':
             self.state = 'demi tour 1'
-            self.create_send_internal('goto', position=(0.95, 0.05), angle=0)
+            self.create_send_internal('goto', position=(0.95, 0.04), angle=0)
         elif self.state == 'demi tour 1' and msg.name == 'goto done':
             self.state = 'fruits 1'
             self.create_send_internal('goto', position=(1.45, 0.04), angle=0)
@@ -92,10 +92,10 @@ class Test(Mission):
             self.create_send_internal('goto', position=(1.69, 1.7), angle=math.pi/2)
         elif self.state == 'avant fruits 3' and msg.name == 'goto done':
             self.state = 'fruits 3'
-            self.create_send_internal('goto', position=(1.69, 2.2), angle=math.pi)
+            self.create_send_internal('goto', position=(1.69, 2.25), angle=math.pi)
         elif self.state == 'fruits 3' and msg.name == 'goto done':
             self.state = 'mammouth ennemi'
-            self.create_send_internal('goto', position=(0.25, 2), angle=math.pi)
+            self.create_send_internal('goto', position=(0.3, 2), angle=math.pi)
         elif self.state == 'mammouth ennemi' and msg.name == 'goto done':
             self.state = 'convoyer'
             self.asserv.convoyer()
