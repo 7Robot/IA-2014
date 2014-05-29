@@ -23,7 +23,7 @@ class Goto(Mission):
         elif msg.board == "internal" and msg.name == 'goto':
             self.position = msg.position if self.robot.color == 1 else (msg.position[0], -msg.position[1])
 
-            assert -math.pi <= self.angle <= math.pi
+            assert -math.pi <= msg.angle <= math.pi
             self.angle = msg.angle if self.robot.color == 1 else -msg.angle
 
             # calcul de la façon dont on va s'orienter pour trouver les sicks utiles
