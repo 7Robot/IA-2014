@@ -51,7 +51,7 @@ class Goto(Mission):
                 self.state = "waiting"
 
         elif msg.board == 'turret' and msg.name == 'pos':
-            if msg.distance > 5:
+            if msg.distance < 5:
                 if self.state == 'going':
                     self.asserv.block()
                     self.state = 'waiting'
