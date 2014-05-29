@@ -78,7 +78,7 @@ class Test(Mission):
             self.create_send_internal('goto', position=(1.2, 1.05), angle=3*math.pi/4)
         elif self.state == 'avant pose feu 4' and msg.name == 'goto done':
             self.state = 'pose feu 4'
-            self.pull_arm(1 + (1 - self.robot.color))
+            self.asserv.pull_arm(1 + (1 - self.robot.color))
         elif self.state == 'pose feu 4' and msg.name == 'laid':
             self.state = 'avant fruits 3'
             self.create_send_internal('goto', position=(1.68, 1.7), angle=math.pi/2)
