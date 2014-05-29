@@ -98,7 +98,7 @@ class Asserv(Proto):
         ])
     laid = Packet(56, "pic")
     raise_arm = Packet(57, "arm", [
-        ("choix", H)
+        ("choix", "H")
         ])
 
 
