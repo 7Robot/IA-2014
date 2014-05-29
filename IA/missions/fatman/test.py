@@ -65,8 +65,17 @@ class Test(Mission):
             self.asserv.catch_arm(1 + self.robot.color)
         elif self.state == 'prendre quatrième feu' and msg.name == 'caught':
             self.state = 'vers foyer du milieu'
-            self.create_send_internal('goto', position=(1.25, 1.35), angle=math.pi/2)
+            self.create_send_internal('goto', position=(1.25, 1.40), angle=2*math.pi/3)
         elif self.state == 'vers foyer du milieu' and msg.name == 'goto done':
+            self.state = 'pose feu 3'
+            self.asserv.pull_arm(1 + (1 - self.robot.color))
+        elif self.state == 'pose feu 3' and msg.name == 'laid':
+            self.state = 'avant pose feu 4'
+            self.create_send_internal('goto', position=(1.25, 1.30), angle=-2*math.pi/3)
+        elif self.state == 'avant pose feu 4' and msg.name == 'goto done':
+            self.state = 'pose feu 4'
+            self.pull_arm(1 + self.robot.color)
+        elif self.state == 'pose feu 4' and msg.name == 'laid':
             pass
 
             self.state = 'convoyer'
