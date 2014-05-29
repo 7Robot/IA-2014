@@ -8,6 +8,11 @@ class Test(Mission):
         super().__init__(robot, boardth)
 
     def go(self, msg):
+        # look at this beautiful hack !
+        if msg.board == 'asserv' and msg.name == 'blocked':
+            msg.name = 'done'
+
+
         if msg.board == 'asserv' and msg.name == 'start':
             self.robot.color = msg.color
             self.asserv.setPos(0, 0, math.pi)
