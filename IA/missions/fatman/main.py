@@ -18,7 +18,7 @@ class Test(Mission):
             self.robot.color = msg.color
             self.create_timer(3, 'timer start')
             self.create_timer(92, 'funny action')
-            self.create_timer(88, 'stop')
+            self.create_timer(85, 'stop')
             self.create_timer(75, 'the end is near')
             self.state = 'waiting for start'
         elif msg.name == 'timer start' and self.state == 'waiting for start':
