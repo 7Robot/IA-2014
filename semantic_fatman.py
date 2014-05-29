@@ -116,6 +116,12 @@ class Asserv(Proto):
         ("id", "B"),
         ('threshold', "H")
         ])
+    askSick = Packet(94, 'arm', [("id", "B")])
+    sickState = Packet(95, 'pic', [
+        ("id", "B"),
+        ('state', "H")
+        ])
+
 
 
 #    odoBroadcastOn = Packet(43, "arm")
