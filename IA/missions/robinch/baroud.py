@@ -36,6 +36,6 @@ class Baroud(Mission):
             self.state = 'off'
             self.create_send_internal('endBaroud')
 
-        elif (msg.board == "internal" and msg.name == "fin_du_match"):
+        if (msg.board == "internal" and msg.name == "fin_du_match"):
             self.state = 'off'
 

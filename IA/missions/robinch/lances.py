@@ -56,6 +56,6 @@ class Lances(Mission):
             self.create_send_internal('endLances')
 
 
-        elif (msg.board == "internal" and msg.name == "fin_du_match"):
+        if (msg.board == "internal" and msg.name == "fin_du_match"):
             self.state = 'off'
 

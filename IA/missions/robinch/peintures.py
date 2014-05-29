@@ -44,6 +44,6 @@ class Peintures(Mission):
             self.create_send_internal('endPeintures')
             self.state = 'off'
             
-        elif (msg.board == "internal" and msg.name == "fin_du_match"):
+        if (msg.board == "internal" and msg.name == "fin_du_match"):
             self.state = 'off'
 
