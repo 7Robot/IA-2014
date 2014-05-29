@@ -35,13 +35,13 @@ class Test(Mission):
             self.asserv.catch_arm(1 + (1 - self.robot.color))
         elif self.state == 'prendre deuxième feu' and msg.name == 'caught':
             self.state = 'pose feux'
-            self.create_send_internal('goto', position=(1.62, 0.14), angle=0.8)
+            self.create_send_internal('goto', position=(1.64, 0.15), angle=0.8)
         elif self.state == 'pose feux' and msg.name == 'goto done':
             self.state = 'pose feu 1'
             self.asserv.pull_arm(1 + (1 - self.robot.color))
         elif self.state == 'pose feu 1' and msg.name == 'laid':
             self.state = 'demi tour feu 2'
-            self.create_send_internal('goto', position=(1.56, 0.08), angle=0.8-math.pi)
+            self.create_send_internal('goto', position=(1.56, 0.07), angle=0.8-math.pi)
         elif self.state == 'demi tour feu 2' and msg.name == 'goto done':
             self.asserv.pull_arm(1 + self.robot.color)
             self.state = 'pose feu 2'
