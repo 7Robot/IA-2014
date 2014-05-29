@@ -50,19 +50,19 @@ class Test(Mission):
             self.create_send_internal('goto', position=(1.68, 0.30), angle=math.pi/2)
         elif self.state == 'fruits 2 avant' and msg.name == 'goto done':
             self.state = 'fruits 2'
-            self.create_send_internal('goto', position=(1.68, 1.1), angle=math.pi/2)
+            self.create_send_internal('goto', position=(1.68, 1.14), angle=math.pi/2)
         elif self.state == 'fruits 2' and msg.name == 'goto done':
             self.state = 'prendre troisième feu'
             self.asserv.catch_arm(1 + (1 - self.robot.color))
         elif self.state == 'prendre troisième feu' and msg.name == 'caught':
             self.state = 'avant quatrième feu'
-            self.create_send_internal('goto', position=(1.68, 1.4), angle=-math.pi/2)
+            self.create_send_internal('goto', position=(1.68, 1.55), angle=-math.pi/2)
         elif self.state == 'avant quatrième feu' and msg.name == 'goto done':
             self.state = 'prendre quatrième feu'
             self.asserv.catch_arm(1 + self.robot.color)
         elif self.state == 'prendre quatrième feu' and msg.name == 'caught':
             self.state = 'vers foyer du milieu'
-            self.create_send_internal('goto', position=(1.2, 1.25), angle=math.pi/2)
+            self.create_send_internal('goto', position=(1.25, 1.35), angle=math.pi/2)
         elif self.state == 'vers foyer du milieu' and msg.name == 'goto done':
             pass
 
