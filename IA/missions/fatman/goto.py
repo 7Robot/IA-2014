@@ -13,6 +13,7 @@ class Goto(Mission):
         self.last_angle = None
         self.angle = None
         self.sicks = set()
+        self.nosick = set()
         
     def go(self, msg):
         if msg.name == 'reset goto':
