@@ -11,5 +11,4 @@ class Fatman:
         self.host = 'fatman'
         self.queue = Queue()
 
-        self.sensor_front = None 
-        self.sensor_back = None
+        self.stopped = False

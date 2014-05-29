@@ -8,7 +8,8 @@ class Convoyer(Mission):
             self.state = "going"            
         
         elif self.state == "going" and msg.name == 'goto done':
-            self.asserv.convoyer()
+            if not self.robot.stopped:
+                self.asserv.convoyer()
             self.state = "convoyage"
 
         elif self.state == 'convoyage' and msg.board == 'asserv' and msg.name == 'done':
