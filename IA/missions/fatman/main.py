@@ -66,7 +66,7 @@ class Test(Mission):
             self.asserv.catch_arm(1 + self.robot.color)
         elif self.state == 'prendre quatrième feu' and msg.name == 'caught':
             self.state = 'vers foyer du milieu'
-            self.create_send_internal('goto', position=(1.2, 1.5), angle=math.pi/4)
+            self.create_send_internal('goto', position=(1.2, 1.53), angle=-0.8)
         elif self.state == 'vers foyer du milieu' and msg.name == 'goto done':
             self.state = 'pose feu 3'
             self.asserv.pull_arm(1 + self.robot.color)
@@ -75,7 +75,7 @@ class Test(Mission):
             self.create_send_internal('goto', position=(1.4, 1.25), angle=math.pi)
         elif self.state == 'après pose feu 3' and msg.name == 'goto done':
             self.state = 'avant pose feu 4'
-            self.create_send_internal('goto', position=(1.2, 1.05), angle=-math.pi/4)
+            self.create_send_internal('goto', position=(1.18, 1.06), angle=-2.36)
         elif self.state == 'avant pose feu 4' and msg.name == 'goto done':
             self.state = 'pose feu 4'
             self.asserv.pull_arm(1 + (1 - self.robot.color))
