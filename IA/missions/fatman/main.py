@@ -10,7 +10,8 @@ class Test(Mission):
     def go(self, msg):
         # look at this beautiful hack !
         if msg.board == 'asserv' and msg.name == 'blocked':
-            msg.name = 'done'
+            msg.name = 'goto done'
+            msg.board = 'internal'
 
 
         if msg.board == 'asserv' and msg.name == 'start':
@@ -65,23 +66,31 @@ class Test(Mission):
             self.asserv.catch_arm(1 + self.robot.color)
         elif self.state == 'prendre quatrième feu' and msg.name == 'caught':
             self.state = 'vers foyer du milieu'
-            self.create_send_internal('goto', position=(1.25, 1.40), angle=2*math.pi/3)
+            self.create_send_internal('goto', position=(1.25, 1.40), angle=3*math.pi/4)
         elif self.state == 'vers foyer du milieu' and msg.name == 'goto done':
             self.state = 'pose feu 3'
             self.asserv.pull_arm(1 + (1 - self.robot.color))
         elif self.state == 'pose feu 3' and msg.name == 'laid':
             self.state = 'avant pose feu 4'
-            self.create_send_internal('goto', position=(1.25, 1.30), angle=-2*math.pi/3)
+            self.create_send_internal('goto', position=(1.25, 1.30), angle=-3*math.pi/4)
         elif self.state == 'avant pose feu 4' and msg.name == 'goto done':
             self.state = 'pose feu 4'
             self.pull_arm(1 + self.robot.color)
         elif self.state == 'pose feu 4' and msg.name == 'laid':
-            pass
-
+            self.state = 'avant fruits 3'
+            self.create_send_internal('goto', position=(1.68, 1.7), angle=math.pi/2)
+        elif self.state == 'avant fruits 3' and msg.name == 'goto done':
+            self.state = 'fruits 3'
+            self.create_send_internal('goto', position=(1.68, 2), angle=math.pi/2)
+        elif self.state == 'fruits 3' and msg.name == 'goto done':
+            self.state = 'mammouth ennemi'
+            self.create_send_internal('goto', position=(0.3, 2), angle=math.pi)
+        elif self.state == 'mammouth ennemi' and msg.name == 'goto done':
             self.state = 'convoyer'
-            self.create_send_internal('convoyer')
-        elif self.state == 'convoyer' and msg.name == 'convoyer done':
+            self.asserv.convoyer()
+        elif self.state == 'convoyer' and msg.name == 'done':
             self.state = 'filet'
             self.create_send_internal('filet')
         elif self.state == 'filet' and msg.board == 'internal' and msg.name == 'filet done':
             self.state = 'fini'
+
