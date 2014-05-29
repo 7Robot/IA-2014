@@ -37,8 +37,11 @@ class Goto(Mission):
             self.last_position = self.position
             self.last_angle = self.angle
 
-            self.asserv.motion_pos(self.position[0], self.position[1])
-            self.state = "going"
+            if self.sicks - self.nosick:
+                self.state = "waiting"
+            else:
+                self.asserv.motion_pos(self.position[0], self.position[1])
+                self.state = "going"
         
         elif msg.board == "asserv" and msg.name == 'sick':
             self.sicks.add(msg.id)
@@ -59,7 +62,7 @@ class Goto(Mission):
                 self.sicks.remove(msg.id)
             except KeyError:
                 logging.warning("Freepath on an already free sick.")
-            if not self.sicks and self.state == 'waiting':
+            if not(self.sick - self.nosick) and self.state == 'waiting':
                 self.asserv.motion_pos(self.position[0], self.position[1])
                 self.state = "going"
                 
