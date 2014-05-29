@@ -52,6 +52,8 @@ class Asserv(Proto):
         ("theta", "f")
         ])
 
+    blocked = Packet(20, "pic")
+
     setPos = Packet(30, "arm", [
         ("x", "f"),
         ("y", "f"),
@@ -114,6 +116,12 @@ class Asserv(Proto):
         ("id", "B"),
         ('threshold', "H")
         ])
+    askSick = Packet(94, 'arm', [("id", "B")])
+    sickState = Packet(95, 'pic', [
+        ("id", "B"),
+        ('state', "H")
+        ])
+
 
 
 #    odoBroadcastOn = Packet(43, "arm")
