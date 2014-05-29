@@ -29,7 +29,7 @@ class Test(Mission):
             self.create_send_internal('goto', position=(1.4, 0.04), angle=0)
         elif self.state == 'fruits 1' and msg.name == 'goto done':
             self.state = 'devant deuxième feu'
-            self.create_send_internal('goto', position=(1.5, 0.5), angle=math.pi)
+            self.create_send_internal('goto', position=(1.5, 0.51), angle=math.pi)
         elif self.state == 'devant deuxième feu' and msg.name == 'goto done':
             self.state = 'prendre deuxième feu'
             self.asserv.catch_arm(1 + (1 - self.robot.color))
