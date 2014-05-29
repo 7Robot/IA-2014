@@ -35,7 +35,7 @@ class Test(Mission):
             self.asserv.catch_arm(1 + (1 - self.robot.color))
         elif self.state == 'prendre deuxième feu' and msg.name == 'caught':
             self.state = 'pose feux'
-            self.create_send_internal('goto', position=(1.64, 0.15), angle=0.8)
+            self.create_send_internal('goto', position=(1.64, 0.15), angle=0.7)
         elif self.state == 'pose feux' and msg.name == 'goto done':
             self.state = 'pose feu 1'
             self.asserv.pull_arm(1 + (1 - self.robot.color))
@@ -50,13 +50,16 @@ class Test(Mission):
             self.create_send_internal('goto', position=(1.68, 0.30), angle=math.pi/2)
         elif self.state == 'fruits 2 avant' and msg.name == 'goto done':
             self.state = 'fruits 2'
-            self.create_send_internal('goto', position=(1.68, 1.14), angle=math.pi/2)
+            self.create_send_internal('goto', position=(1.68, 1.135), angle=math.pi/2)
         elif self.state == 'fruits 2' and msg.name == 'goto done':
             self.state = 'prendre troisième feu'
             self.asserv.catch_arm(1 + (1 - self.robot.color))
         elif self.state == 'prendre troisième feu' and msg.name == 'caught':
+            self.state = 'après troisième feu'
+            self.create_send_internal('goto', position=(1.6, 1.3), angle=-math.pi/2)
+        elif self.state == 'après troisième feu' and msg.name == 'goto done':
             self.state = 'avant quatrième feu'
-            self.create_send_internal('goto', position=(1.68, 1.55), angle=-math.pi/2)
+            self.create_send_internal('goto', position=(1.68, 1.54), angle=-math.pi/2)
         elif self.state == 'avant quatrième feu' and msg.name == 'goto done':
             self.state = 'prendre quatrième feu'
             self.asserv.catch_arm(1 + self.robot.color)
