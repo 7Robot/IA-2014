@@ -58,6 +58,7 @@ class Goto(Mission):
                     self.state = 'waiting'
             else:
                 if self.state == 'waiting' and not(self.sicks - self.nosick):
+                    self.state = 'going'
                     self.asserv.motion_pos(self.position[0], self.position[1])
 
         elif self.state == 'going' and msg.board == "asserv" and msg.name == 'done':
