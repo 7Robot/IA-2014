@@ -10,15 +10,15 @@ class Capteurs(Mission):
 
     def go(self, msg):
         if self.state == 'frontsick':
-            if (msg.board == 'asserv' and msg.name == 'sick' and msg.id == 0):
+            if (msg.board == 'asserv' and msg.name == 'sick' and msg.id == 1):
                 self.create_send_internal('alert', id='front')
-            elif (msg.board == 'asserv' and msg.name == 'freepath' and msg.id == 0):
+            elif (msg.board == 'asserv' and msg.name == 'freepath' and msg.id == 1):
                 self.create_send_internal('freepath', id='front')
 
         elif self.state == 'backsick':
-            if (msg.board == 'asserv' and msg.name == 'sick' and msg.id == 1):
+            if (msg.board == 'asserv' and msg.name == 'sick' and msg.id == 0):
                 self.create_send_internal('alert', id='back')
-            elif (msg.board == 'asserv' and msg.name == 'freepath' and msg.id == 1):
+            elif (msg.board == 'asserv' and msg.name == 'freepath' and msg.id == 0):
                 self.create_send_internal('freepath', id='back')
 
         elif self.state == 'on':

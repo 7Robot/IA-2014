@@ -39,7 +39,6 @@ class Peintures(Mission):
             
         elif (self.state == 'ackbar2' and msg.board == 'internal' and msg.name == 'forward_done'):
             self.create_send_internal('turn', target=-pi/2)
-            self.create_send_internal('frontsick')
             self.state = 'ackbar3'
             
         elif (self.state == 'ackbar3' and msg.board == 'internal' and msg.name =='turn_done'):
