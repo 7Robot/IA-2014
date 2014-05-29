@@ -35,12 +35,14 @@ class Peintures(Mission):
             
         elif (self.state == 'ackbar' and msg.board == 'asserv' and msg.name =='done'):
             self.create_send_internal('forward', target=0.950, axe='y')
+            self.state = 'ackbar2'
             
-        elif (self.state == 'ackbar' and msg.board == 'internal' and msg.name == 'forward_done'):
+        elif (self.state == 'ackbar2' and msg.board == 'internal' and msg.name == 'forward_done'):
             self.create_send_internal('turn', target=-pi/2)
             self.create_send_internal('beginSick')
+            self.state = 'ackbar3'
             
-        elif (self.state == 'ackbar' and msg.board == 'internal' and msg.name =='turn_done'):
+        elif (self.state == 'ackbar3' and msg.board == 'internal' and msg.name =='turn_done'):
             self.create_send_internal('endPeintures')
             self.state = 'off'
             
