@@ -51,6 +51,12 @@ class Asserv(Proto):
     motion_angle = Packet(12, "arm", [
         ("theta", "f")
         ])
+    motion_sequence = Packet(13, "arm", [
+        ("x1", "f"),
+        ("y1", "f"),
+        ("x2", "f"),
+        ("y2", "f")
+        ])
 
     blocked = Packet(20, "pic")
 
