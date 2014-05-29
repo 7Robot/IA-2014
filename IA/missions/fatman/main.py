@@ -8,9 +8,18 @@ class Test(Mission):
         super().__init__(robot, boardth)
 
     def go(self, msg):
+        # look at this beautiful hack !
+        if msg.board == 'asserv' and msg.name == 'blocked':
+            msg.name = 'goto done'
+            msg.board = 'internal'
+
         if msg.board == 'asserv' and msg.name == 'start':
             self.robot.color = msg.color
-            self.asserv.setPos(0, 0, math.pi)
+            self.create_timer(3, 'timer start')
+            self.create_timer(92, 'funny action')
+            self.state = 'waiting for start'
+        elif msg.name == 'timer start' and self.state == 'waiting for start':
+            self.create_send_internal('reset goto')
             self.create_send_internal('goto', position=(0.7, 0.05), angle=math.pi)
             self.state = 'sortie'
         elif self.state == 'sortie' and msg.board == 'internal' and msg.name == 'goto done':
