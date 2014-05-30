@@ -14,7 +14,7 @@ class Lances(Mission):
     def go(self, msg):
         if (self.state == 'off' and msg.board == 'internal' and msg.name == 'beginLances'):
             self.state = 'on'
-            self.pos = -0.870
+            self.pos = -0.835
             self.create_send_internal('forward', target=self.pos, axe='x')
 
         elif (self.state == 'on' and msg.board == 'internal' and msg.name == 'forward_done'):
@@ -36,7 +36,7 @@ class Lances(Mission):
             self.state = 'shoot'
 
         elif (self.state == 'turning2' and msg.name == 'doneLaunch'):
-            self.create_send_internal('turn', target=11*pi/10)
+            self.create_send_internal('turn', target=6*pi/5)
             self.state = 'shoot'
             
         elif (self.state == 'shoot' and (msg.name == 'forward_done' or msg.name == 'turn_done')): 
@@ -56,6 +56,6 @@ class Lances(Mission):
             self.create_send_internal('endLances')
 
 
-        elif (msg.board == "internal" and msg.name == "fin_du_match"):
+        if (msg.board == "internal" and msg.name == "fin_du_match"):
             self.state = 'off'
 

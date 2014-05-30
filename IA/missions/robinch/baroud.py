@@ -10,13 +10,13 @@ class Baroud(Mission):
     def __init__(self, robot, boardth):
         super().__init__(robot, boardth)
         self.pos = 0
-        self.moumouth = Vertex(0.73, 1)
+        self.moumouth = Vertex(-0.73, 1)
         
     def go(self, msg):
         if (self.state == 'off' and msg.board == 'internal' and msg.name == 'beginBaroud'):
             self.state = 'on'
             if Mission.data['color'] == 'rouge':
-                self.moumouth = Vertex(-0.73, 1) 
+                self.moumouth = Vertex(0.73, 1) 
             self.create_send_internal('forward', target=-0.12, axe='x')
 
         elif (self.state == 'on' and msg.board == 'internal' and msg.name == 'forward_done'):
@@ -36,6 +36,6 @@ class Baroud(Mission):
             self.state = 'off'
             self.create_send_internal('endBaroud')
 
-        elif (msg.board == "internal" and msg.name == "fin_du_match"):
+        if (msg.board == "internal" and msg.name == "fin_du_match"):
             self.state = 'off'
 

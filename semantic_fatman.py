@@ -51,6 +51,17 @@ class Asserv(Proto):
     motion_angle = Packet(12, "arm", [
         ("theta", "f")
         ])
+    motion_sequence = Packet(13, "arm", [
+        ("x1", "f"),
+        ("y1", "f"),
+        ("x2", "f"),
+        ("y2", "f")
+        ])
+    motion_push = Packet(14, "arm", [
+        ("x", "f"),
+        ("y", "f"),
+        ("d", "f")
+        ])
 
     blocked = Packet(20, "pic")
 
@@ -100,6 +111,9 @@ class Asserv(Proto):
     raise_arm = Packet(57, "arm", [
         ("choix", "H")
         ])
+    salut = Packet(58,"arm", [
+      ("choix","H")
+      ])
 
 
     launch_net = Packet(60, "arm")
@@ -109,6 +123,11 @@ class Asserv(Proto):
     slight_convoyer = Packet(62, "arm")
 
     poulet = Packet(63, "arm")
+    
+    
+    
+    
+    
 
 
       #### Message pour sick

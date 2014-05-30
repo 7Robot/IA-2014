@@ -16,7 +16,7 @@ class Peintures(Mission):
 
         elif (self.state == 'on' and msg.board == 'internal' and msg.name =='turn_done'):
             self.create_send_internal('backsick')
-            self.create_send_internal('forward', target=0.750, axe='y')
+            self.create_send_internal('forward', target=0.550, axe='y')
             self.state = 'before'
             
         elif (self.state == 'before' and msg.board == 'internal' and msg.name == 'forward_done'):
@@ -25,26 +25,26 @@ class Peintures(Mission):
             self.state = 'pinage'
 
         elif (self.state == 'pinage' and msg.board == 'internal' and msg.name =='turn_done'):
-            self.create_timer(3.0, 'end_pinage')
+            self.create_timer(2.0, 'end_pinage')
             self.create_send_internal('forward', target=1, axe='y')
             
         elif (self.state == 'pinage' and msg.board == 'internal' and msg.name == 'end_pinage'):
             self.asserv.stop()
             self.state = 'ackbar'
             self.create_send_internal('frontsick')
-            self.create_send_internal('its_a_trap')
             
-        elif (self.state == 'ackbar' and msg.board == 'internal' and msg.name =='its_a_trap'):
-            self.create_send_internal('forward', target=0.950, axe='y')
+        elif (self.state == 'ackbar' and msg.board == 'internal' and msg.name =='forward_done'):
+            self.create_send_internal('forward', target=0.600, axe='y')
+            self.state = 'ackbar2'
             
-        elif (self.state == 'ackbar' and msg.board == 'internal' and msg.name == 'forward_done'):
+        elif (self.state == 'ackbar2' and msg.board == 'internal' and msg.name == 'forward_done'):
             self.create_send_internal('turn', target=-pi/2)
-            self.create_send_internal('beginSick')
+            self.state = 'ackbar3'
             
-        elif (self.state == 'ackbar' and msg.board == 'internal' and msg.name =='turn_done'):
+        elif (self.state == 'ackbar3' and msg.board == 'internal' and msg.name =='turn_done'):
             self.create_send_internal('endPeintures')
             self.state = 'off'
             
-        elif (msg.board == "internal" and msg.name == "fin_du_match"):
+        if (msg.board == "internal" and msg.name == "fin_du_match"):
             self.state = 'off'
 
