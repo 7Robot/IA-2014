@@ -21,9 +21,9 @@ class Forward(Mission):
     @inverser
     def walk(self, axe, target):
         if (axe == 'x'):
-            self.asserv.reachX(target, 0.2, 0.07)
+            self.asserv.reachX(target, 0.2, 0.05)
         elif (axe == 'y'):
-            self.asserv.reachY(target, 0.2, 0.07)
+            self.asserv.reachY(target, 0.2, 0.05)
         
     def go(self, msg):
         if (msg.board == "internal" and msg.name == 'forward'):
