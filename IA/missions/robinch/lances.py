@@ -35,7 +35,7 @@ class Lances(Mission):
             self.create_send_internal('turn', target=-11*pi/10)
             self.state = 'shoot'
 
-        elif (self.state == 'turning' and msg.name == 'doneLaunch'):
+        elif (self.state == 'turning2' and msg.name == 'doneLaunch'):
             self.create_send_internal('turn', target=11*pi/10)
             self.state = 'shoot'
             
