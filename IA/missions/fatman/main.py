@@ -57,7 +57,7 @@ class Test(Mission):
             self.state = 'pose feu 2'
         elif self.state == 'pose feu 2' and msg.name == 'laid':
         # FIN POSE FEUX
-             self.state = 'devant troisième feu'
+            self.state = 'devant troisième feu'
             self.create_send_internal('goto', position=(1.5, 0.52), angle=math.pi)
         elif self.state == 'devant troisième feu' and msg.name == 'goto done':
             self.state = 'prendre troisième feu'
