@@ -41,7 +41,7 @@ class Test(Mission):
             self.state = 'pose feux'
             if not self.robot.stopped:
                 self.asserv.raise_arm(2 - self.robot.color)
-            self.create_send_internal('goto', position=(1.66, 0.16), angle=0.7)
+            self.create_send_internal('goto', position=(1.66, 0.16), angle=0.8)
         elif self.state == 'pose feux' and msg.name == 'goto done':
             self.state = 'pose feu 1'
             if not self.robot.stopped:
