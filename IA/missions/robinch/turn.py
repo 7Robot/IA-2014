@@ -8,7 +8,7 @@ class Turn(Mission):
         
     def go(self, msg):
         if (msg.board == "internal" and msg.name == 'turn'):
-            self.asserv.reachTheta(msg.target, 0.20, 0.05)
+            self.asserv.reachTheta(msg.target, 0.15, 0.05)
             self.state = "turning"
 
         elif (self.state == "turning"):
