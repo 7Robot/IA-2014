@@ -30,12 +30,12 @@ class Test(Mission):
             if not self.robot.stopped:
                 self.asserv.catch_arm(1 + self.robot.color)
         elif self.state == 'prendre premier feu' and msg.name == 'caught':
-            self.state = 'demi tour 1'
-            self.create_send_internal('goto', position=(0.95, 0.04), angle=0)
-        elif self.state == 'demi tour 1' and msg.name == 'goto done':
-            self.state = 'fruits 1'
-            self.create_send_internal('goto', position=(1.45, 0.04), angle=0)
-        elif self.state == 'fruits 1' and msg.name == 'goto done':
+        #    self.state = 'demi tour 1'
+        #    self.create_send_internal('goto', position=(0.95, 0.04), angle=0)
+        #elif self.state == 'demi tour 1' and msg.name == 'goto done':
+        #    self.state = 'fruits 1'
+        #    self.create_send_internal('goto', position=(1.45, 0.04), angle=0)
+        #elif self.state == 'fruits 1' and msg.name == 'goto done':
             self.state = 'devant deuxième feu'
             self.create_send_internal('goto', position=(1.5, 0.52), angle=math.pi)
         elif self.state == 'devant deuxième feu' and msg.name == 'goto done':
@@ -61,9 +61,9 @@ class Test(Mission):
                 self.asserv.pull_arm(1 + self.robot.color)
             self.state = 'pose feu 2'
         elif self.state == 'pose feu 2' and msg.name == 'laid':
-            self.state = 'fruits 2 avant'
-            self.create_send_internal('goto', position=(1.68, 0.30), angle=math.pi/2)
-        elif self.state == 'fruits 2 avant' and msg.name == 'goto done':
+        #    self.state = 'fruits 2 avant'
+        #    self.create_send_internal('goto', position=(1.68, 0.30), angle=math.pi/2)
+        #elif self.state == 'fruits 2 avant' and msg.name == 'goto done':
             self.state = 'fruits 2'
             self.create_send_internal('goto', position=(1.68, 1.135), angle=math.pi/2)
         elif self.state == 'fruits 2' and msg.name == 'goto done':
