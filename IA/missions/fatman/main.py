@@ -94,4 +94,6 @@ class Test(Mission):
         elif self.state == 'pose feu 4' and msg.name == 'laid':
             self.state = 'filet'
             self.create_send_internal('filet')
+        elif msg.board == 'internal' and msg.name == 'filet':
+            self.state = 'filet'
 
