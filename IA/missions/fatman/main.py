@@ -50,7 +50,7 @@ class Test(Mission):
             self.state = 'demi tour feu 2'
             if not self.robot.stopped:
                 self.asserv.raise_arm(1 + self.robot.color)
-            self.create_send_internal('goto', position=(1.56, 0.07), angle=0.8-math.pi)
+            self.create_send_internal('goto', position=(1.55, 0.06), angle=0.8-math.pi)
         elif self.state == 'demi tour feu 2' and msg.name == 'goto done':
             if not self.robot.stopped:
                 self.asserv.pull_arm(1 + self.robot.color)
@@ -65,7 +65,7 @@ class Test(Mission):
                 self.asserv.catch_arm(2 - self.robot.color)
         elif self.state == 'prendre troisième feu' and msg.name == 'caught':
             self.state = 'devant quatrième feu'
-            self.create_send_internal('goto', position=(1.68, 1.135), angle=-math.pi/2)
+            self.create_send_internal('goto', position=(1.67, 1.135), angle=-math.pi/2)
         elif self.state == 'devant quatrième feu' and msg.name == 'goto done':
             self.state = 'prendre quatrième feu'
             if not self.robot.stopped:
