@@ -75,7 +75,7 @@ class Test(Mission):
             self.state = 'vers foyer du milieu'
             if not self.robot.stopped:
                 self.asserv.raise_arm(2 - self.robot.color)
-            self.create_send_internal('goto', position=(1.27, 1.38), angle=-math.pi/2)
+            self.create_send_internal('goto', position=(1.31, 1.38), angle=-math.pi/2)
         elif self.state == 'vers foyer du milieu' and msg.name == 'goto done':
             self.state = 'pose feu 3'
             if not self.robot.stopped:
@@ -84,7 +84,7 @@ class Test(Mission):
             self.state = 'avant pose feu 4'
             if not self.robot.stopped:
                 self.asserv.raise_arm(1 + self.robot.color)
-            self.create_send_internal('goto', position=(1.12, 1.03), angle=0.4)
+            self.create_send_internal('goto', position=[(1.4, 1.25), (1.12, 1.03)], angle=0.4)
         elif self.state == 'avant pose feu 4' and msg.name == 'goto done':
             self.state = 'pose feu 4'
             if not self.robot.stopped:
