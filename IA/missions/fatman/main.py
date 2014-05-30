@@ -3,6 +3,8 @@
 from missions.mission import Mission
 import math
 
+SICKS = (0,1,2,3)
+
 class Test(Mission):
     def __init__(self, robot, boardth):
         super().__init__(robot, boardth)
@@ -31,7 +33,7 @@ class Test(Mission):
                 self.asserv.catch_arm(1 + self.robot.color)
         elif self.state == 'prendre premier feu' and msg.name == 'caught':
             self.state = 'devant deuxième feu'
-            self.create_send_internal('goto', position=(0.8, 0.22), angle=math.pi/2)
+            self.create_send_internal('goto', position=(0.8, 0.22), angle=math.pi/2, nosick=SICKS)
         elif self.state == 'devant deuxième feu' and msg.name == 'goto done':
             self.state = 'prendre deuxième feu'
             if not self.robot.stopped:
@@ -41,7 +43,7 @@ class Test(Mission):
             self.state = 'pose feux'
             if not self.robot.stopped:
                 self.asserv.raise_arm(2 - self.robot.color)
-            self.create_send_internal('goto', position=(1.66, 0.16), angle=0.8)
+            self.create_send_internal('goto', position=(1.66, 0.16), angle=0.8, nosick=SICKS)
         elif self.state == 'pose feux' and msg.name == 'goto done':
             self.state = 'pose feu 1'
             if not self.robot.stopped:
