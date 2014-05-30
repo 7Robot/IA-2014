@@ -18,7 +18,7 @@ class Test(Mission):
             self.robot.color = msg.color
             self.create_timer(3, 'timer start')
             self.create_timer(92, 'funny action')
-            self.create_timer(85, 'stop')
+            self.create_timer(87, 'stop')
             self.create_timer(75, 'the end is near')
             self.state = 'waiting for start'
         elif msg.name == 'timer start' and self.state == 'waiting for start':
@@ -50,7 +50,7 @@ class Test(Mission):
             self.state = 'demi tour feu 2'
             if not self.robot.stopped:
                 self.asserv.raise_arm(1 + self.robot.color)
-            self.create_send_internal('goto', position=(1.55, 0.06), angle=0.8-math.pi)
+            self.create_send_internal('goto', position=(1.54, 0.06), angle=0.8-math.pi)
         elif self.state == 'demi tour feu 2' and msg.name == 'goto done':
             if not self.robot.stopped:
                 self.asserv.pull_arm(1 + self.robot.color)
@@ -58,7 +58,7 @@ class Test(Mission):
         elif self.state == 'pose feu 2' and msg.name == 'laid':
         # FIN POSE FEUX
             self.state = 'devant troisième feu'
-            self.create_send_internal('goto', position=(1.5, 0.51), angle=math.pi)
+            self.create_send_internal('goto', position=(1.5, 0.52), angle=math.pi)
         elif self.state == 'devant troisième feu' and msg.name == 'goto done':
             self.state = 'prendre troisième feu'
             if not self.robot.stopped:
