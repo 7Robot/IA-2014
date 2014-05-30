@@ -16,7 +16,7 @@ class Test(Mission):
 
         if msg.board == 'asserv' and msg.name == 'start':
             self.robot.color = msg.color
-            self.create_timer(3, 'timer start')
+            self.create_timer(1, 'timer start')
             self.create_timer(92, 'funny action')
             self.create_timer(87, 'stop')
             self.create_timer(75, 'the end is near')
