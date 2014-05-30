@@ -24,7 +24,6 @@ class WaitForSignal(Mission):
                 self.create_send_internal('frontsick') 
             #self.create_send_internal('beginHomolog')
             #self.create_send_internal('beginLances')
-
             self.create_send_internal('beginPeintures2')
 
         elif (self.state == 'lances' and msg.name == 'endPeintures2'):
