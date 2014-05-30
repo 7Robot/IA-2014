@@ -32,7 +32,7 @@ class Lances(Mission):
             self.state = 'shoot'
             
         elif (self.state == 'turning' and msg.name == 'doneLaunch'):
-            self.create_send_internal('turn', target=pi)
+            self.create_send_internal('turn', target=-6*pi/5)
             self.state = 'shoot'
 
         elif (self.state == 'turning2' and msg.name == 'doneLaunch'):
@@ -42,11 +42,11 @@ class Lances(Mission):
         elif (self.state == 'shoot' and (msg.name == 'forward_done' or msg.name == 'turn_done')): 
             self.asserv.launchBalls((6-self.doneball)-1)
             self.doneball += 1
-            if self.doneball == 3:
+            if self.doneball == 4:
                 self.state = "turning"
             elif (self.doneball == 0):
                 self.state = "turning2"
-            elif (self.doneball == 2 or self.doneball == 4 or self.doneball == 1):
+            elif (self.doneball == 2 or self.doneball == 3 or self.doneball == 1):
                 self.state = 'forw'
             else:
                 self.state = 'ending'
