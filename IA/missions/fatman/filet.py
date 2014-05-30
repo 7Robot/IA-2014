@@ -9,7 +9,7 @@ class Filet(Mission):
         
     def go(self, msg):
         if msg.board == "internal" and msg.name == 'filet':
-            self.create_send_internal('goto', position=(0.6, 0.52), angle=math.pi)
+            self.create_send_internal('goto', position=(0.55, 0.52), angle=math.pi)
             self.state = "going"
         
         elif self.state == "going" and msg.name == 'goto done':
