@@ -100,6 +100,9 @@ class Asserv(Proto):
     raise_arm = Packet(57, "arm", [
         ("choix", "H")
         ])
+    salut = Packet(58,"arm", [
+      ("choix","H")
+      ])
 
 
     launch_net = Packet(60, "arm")
@@ -109,6 +112,11 @@ class Asserv(Proto):
     slight_convoyer = Packet(62, "arm")
 
     poulet = Packet(63, "arm")
+    
+    
+    
+    
+    
 
 
       #### Message pour sick
