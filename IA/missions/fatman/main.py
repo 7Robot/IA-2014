@@ -18,7 +18,7 @@ class Test(Mission):
             self.robot.color = msg.color
             self.create_timer(3, 'timer start')
             self.create_timer(92, 'funny action')
-            self.create_timer(85, 'stop')
+            self.create_timer(87, 'stop')
             self.create_timer(75, 'the end is near')
             self.state = 'waiting for start'
         elif msg.name == 'timer start' and self.state == 'waiting for start':
@@ -50,7 +50,7 @@ class Test(Mission):
             self.state = 'demi tour feu 2'
             if not self.robot.stopped:
                 self.asserv.raise_arm(1 + self.robot.color)
-            self.create_send_internal('goto', position=(1.55, 0.06), angle=0.8-math.pi)
+            self.create_send_internal('goto', position=(1.54, 0.06), angle=0.8-math.pi)
         elif self.state == 'demi tour feu 2' and msg.name == 'goto done':
             if not self.robot.stopped:
                 self.asserv.pull_arm(1 + self.robot.color)
@@ -74,24 +74,24 @@ class Test(Mission):
         # FOYER MILIEU
             self.state = 'vers foyer du milieu'
             if not self.robot.stopped:
-                self.asserv.raise_arm(1 + self.robot.color)
-            self.create_send_internal('goto', position=(1.2, 1.53), angle=-0.8+math.pi)
+                self.asserv.raise_arm(2 - self.robot.color)
+            self.create_send_internal('goto', position=(1.2, 1.53), angle=-0.8)
         elif self.state == 'vers foyer du milieu' and msg.name == 'goto done':
             self.state = 'pose feu 3'
             if not self.robot.stopped:
-                self.asserv.push_arm(1 + self.robot.color)
+                self.asserv.pull_arm(2 - self.robot.color)
         elif self.state == 'pose feu 3' and msg.name == 'laid':
             self.state = 'après pose feu 3'
-            self.create_send_internal('goto', position=(1.4, 1.25), angle=math.pi)
+            self.create_send_internal('goto', position=(1.4, 1.25), angle=0)
         elif self.state == 'après pose feu 3' and msg.name == 'goto done':
             self.state = 'avant pose feu 4'
             if not self.robot.stopped:
-                self.asserv.raise_arm(2 - self.robot.color)
-            self.create_send_internal('goto', position=(1.18, 1.06), angle=-2.36)
+                self.asserv.raise_arm(1 + self.robot.color)
+            self.create_send_internal('goto', position=(1.15, 1.03), angle=0.7)
         elif self.state == 'avant pose feu 4' and msg.name == 'goto done':
             self.state = 'pose feu 4'
             if not self.robot.stopped:
-                self.asserv.push_arm(2 - self.robot.color)
+                self.asserv.push_arm(1 + self.robot.color)
         elif self.state == 'pose feu 4' and msg.name == 'laid':
             self.state = 'filet'
             self.create_send_internal('filet')
