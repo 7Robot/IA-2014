@@ -81,6 +81,7 @@ class Test(Mission):
             if not self.robot.stopped:
                 self.asserv.pull_arm(2 - self.robot.color)
         elif self.state == 'pose feu 3' and msg.name == 'laid':
+            self.state = 'avant pose feu 4'
             if not self.robot.stopped:
                 self.asserv.raise_arm(1 + self.robot.color)
             self.create_send_internal('goto', position=[(1.15, 1.03), (1.4, 1.25)], angle=0.7)
