@@ -31,7 +31,7 @@ class Test(Mission):
                 self.asserv.catch_arm(1 + self.robot.color)
         elif self.state == 'prendre premier feu' and msg.name == 'caught':
             self.state = 'devant deuxième feu'
-            self.create_send_internal('goto', position=(0.79, 0.22), angle=math.pi/2)
+            self.create_send_internal('goto', position=(0.8, 0.22), angle=math.pi/2)
         elif self.state == 'devant deuxième feu' and msg.name == 'goto done':
             self.state = 'prendre deuxième feu'
             if not self.robot.stopped:
@@ -40,12 +40,12 @@ class Test(Mission):
         # POSE DES FEUX
             self.state = 'pose feux'
             if not self.robot.stopped:
-                self.asserv.raise_arm(1 + (1 - self.robot.color))
+                self.asserv.raise_arm(2 - self.robot.color)
             self.create_send_internal('goto', position=(1.64, 0.15), angle=0.7)
         elif self.state == 'pose feux' and msg.name == 'goto done':
             self.state = 'pose feu 1'
             if not self.robot.stopped:
-                self.asserv.pull_arm(1 + (1 - self.robot.color))
+                self.asserv.push_arm(2 - self.robot.color)
         elif self.state == 'pose feu 1' and msg.name == 'laid':
             self.state = 'demi tour feu 2'
             if not self.robot.stopped:
@@ -86,12 +86,12 @@ class Test(Mission):
         elif self.state == 'après pose feu 3' and msg.name == 'goto done':
             self.state = 'avant pose feu 4'
             if not self.robot.stopped:
-                self.asserv.raise_arm(1 + (1 - self.robot.color))
+                self.asserv.raise_arm(2 - self.robot.color)
             self.create_send_internal('goto', position=(1.18, 1.06), angle=-2.36)
         elif self.state == 'avant pose feu 4' and msg.name == 'goto done':
             self.state = 'pose feu 4'
             if not self.robot.stopped:
-                self.asserv.pull_arm(1 + (1 - self.robot.color))
+                self.asserv.push_arm(2 - self.robot.color)
         elif self.state == 'pose feu 4' and msg.name == 'laid':
             self.state = 'filet'
             self.create_send_internal('filet')
