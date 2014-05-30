@@ -26,7 +26,7 @@ class Baroud(Mission):
             self.create_send_internal('turn', target=angle_tir)
         
         elif (self.state == 'allyourbasearebelongtous' and msg.board == 'internal' and msg.name == 'turn_done'):
-            self.asserv.launchBalls(6)
+            self.asserv.launchBalls(0)
             
         elif (self.state == 'allyourbasearebelongtous' and msg.board == 'asserv' and msg.name == 'doneLaunch'):
             self.asserv.stopLaunch()
