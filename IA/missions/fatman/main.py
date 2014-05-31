@@ -86,7 +86,7 @@ class Test(Mission):
             self.state = 'avant pose feu 4'
             if not self.robot.stopped:
                 self.asserv.raise_arm(1 + self.robot.color)
-            self.create_send_internal('goto', position=[(1.4, 1), (1.03, 1.00)], angle=0.3)
+            self.create_send_internal('goto', position=[(1.4, 1), (1.02, 1.00)], angle=0.3)
         elif self.state == 'avant pose feu 4' and msg.name == 'goto done':
             self.state = 'pose feu 4'
             if not self.robot.stopped:
