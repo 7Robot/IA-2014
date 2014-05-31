@@ -2,8 +2,8 @@ import logging
 import math
 from missions.mission import Mission
 
-SICKS_FRONT = {2, 3}
-SICKS_BACK = {0, 1}
+SICKS_FRONT = frozenset([2, 3])
+SICKS_BACK = frozenset([0, 1])
 
 class Goto(Mission):
     def __init__(self, robot, boardth):
@@ -49,7 +49,7 @@ class Goto(Mission):
             angle = math.atan2(self.position[-1][1] - self.last_position[1], self.position[-1][0] - self.last_position[0])
             self.nosick = SICKS_BACK if abs(angle - self.last_angle) < math.pi / 2 else SICKS_FRONT
             try:
-                self.nosick.update(msg.nosick)
+                self.nosick = self.nosick + frozenset(msg.nosick)
             except:
                 pass
 
