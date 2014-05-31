@@ -49,8 +49,8 @@ class Goto(Mission):
             angle = math.atan2(self.position[-1][1] - self.last_position[1], self.position[-1][0] - self.last_position[0])
             self.nosick = SICKS_BACK if abs(angle - self.last_angle) < math.pi / 2 else SICKS_FRONT
             try:
-                self.nosick = self.nosick + frozenset(msg.nosick)
-            except:
+                self.nosick = self.nosick | frozenset(msg.nosick)
+            except AttributeError:
                 pass
 
             self.last_position = self.position[-1]
