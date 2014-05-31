@@ -50,7 +50,7 @@ class Goto(Mission):
             self.nosick = SICKS_BACK if abs(angle - self.last_angle) < math.pi / 2 else SICKS_FRONT
             try:
                 self.nosick = self.nosick | frozenset(msg.nosick)
-            except AttributeError:
+            except KeyError:
                 pass
 
             self.last_position = self.position[-1]
