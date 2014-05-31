@@ -20,8 +20,8 @@ class Test(Mission):
             self.robot.color = msg.color
             self.create_timer(1, 'timer start')
             self.create_timer(92, 'funny action')
-            self.create_timer(87, 'stop')
-            self.create_timer(80, 'filet')
+            self.create_timer(90, 'stop')
+            self.create_timer(82, 'filet')
             self.state = 'waiting for start'
         elif msg.name == 'timer start' and self.state == 'waiting for start':
             self.create_send_internal('reset goto')
