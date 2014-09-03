@@ -22,3 +22,6 @@ if __name__ == "__main__":
     boardth.start()
     IA = ia.IA(robot, boardth)
     IA.run()
+
+
+#pouet
