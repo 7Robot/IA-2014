@@ -23,7 +23,8 @@ class WaitForSignal(Mission):
                 self.asserv.setXYTheta(-1.330, 0.482, pi)
                 self.create_send_internal('frontsick') 
             #self.create_send_internal('beginHomolog')
-            self.create_send_internal('beginLances')
+            #self.create_send_internal('beginLances')
+            self.create_send_internal('beginBP')
             #self.create_send_internal('beginPeintures2')
 
         elif (self.state == 'lances' and msg.name == 'endPeintures2'):
@@ -33,6 +34,8 @@ class WaitForSignal(Mission):
         elif (self.state == 'baroud2' and msg.name == 'endBaroud2'):
             self.create_send_internal('fin_du_match')
 
+        elif (self.state == 'lances' and msg.name == 'endBP'):
+            self.create_send_internal('fin_du_match')
             
         elif (self.state =='lances' and msg.board == 'internal' and msg.name == 'endHomolog'):
             self.create_send_internal('fin_du_match')

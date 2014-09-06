@@ -8,11 +8,11 @@ class BP(Mission):
     def __init__(self, robot, boardth):
         super(BP, self).__init__(robot, boardth)
         self.name = 'BP'
-        self.pos = 0
+        self.pos = -1.330
         self.doneball = 0
 
     def go(self, msg):
-        if (self.state == 'off' and msg.board == 'internal' and msg.name == 'beginLances'):
+        if (self.state == 'off' and msg.board == 'internal' and msg.name == 'beginBP'):
             self.asserv.launchBalls(5)
             self.doneball += 1
             self.state = "forw"
@@ -45,7 +45,7 @@ class BP(Mission):
 
         elif self.state == 'ending' and msg.name == 'doneLaunch':
             self.asserv.stopLaunch()
-            self.create_send_internal('endLances')
+            self.create_send_internal('endBP')
 
 
         if (msg.board == "internal" and msg.name == "fin_du_match"):
